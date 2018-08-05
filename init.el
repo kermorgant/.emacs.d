@@ -25,6 +25,7 @@
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
                          ("gnu"       . "http://elpa.gnu.org/packages/")
                          ("melpa"     . "https://melpa.org/packages/")))
+(put 'narrow-to-region 'disabled nil)
 
 (package-initialize) ; guess what this one does ?
 ;; Bootstrap `use-package'

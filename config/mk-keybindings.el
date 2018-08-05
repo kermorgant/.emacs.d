@@ -51,6 +51,8 @@
 
    "ll" 'persp-switch
    "lc" 'persp-add-new
+   "ln" 'persp-next
+   "lp" 'persp-prev
 
    ;; Projects
    "p" '(:ignore t :which-key "Projects")
@@ -69,21 +71,22 @@
 
    "v" 'er/expand-region
 
-   "wm" 'mk/toggle-maximize-buffer
+   "wF" 'make-frame
+   "wm" 'delete-other-windows
    "wu" 'winner-undo
    "w/" 'split-window-right-and-focus
    "w-" 'split-window-below
    )
 
   (general-define-key
-   :states '(normal visual)
-   :prefix ","
+   :states '(normal visual insert)
+   :prefix "s-SPC"
    "A"  '(sp-add-to-previous-sexp :wk "sp-add-to-previous-sexp")
    ;; "a"  '(sp-add-to-next-sexp :wk sp-add-to-next-sexp)
    ;; "B"  '(sp-backward-barf-sexp :wk sp-backward-barf-sexp)
    ;; "b"  '(sp-forward-barf-sexp :wk sp-forward-barf-sexp)
    ;; "M"  '(sp-backward-slurp-sexp :wk sp-backward-slurp-sexp)
-   ;; "m"  '(sp-forward-slurp-sexp :wk sp-forward-slurp-sexp)
+   "l"  '(sp-forward-slurp-sexp :wk "sp-forward-slurp-sexp")
    ;; "c"  '(sp-convolute-sexp :wk sp-convolute-sexp)
    ;; "D"  '(sp-backward-kill-sexp :wk sp-backward-kill-sexp)
    "d"  '(sp-kill-sexp :wk "sp-kill-sexp")
@@ -101,7 +104,7 @@
    "U"  '(sp-backward-unwrap-sexp :wk "backward-unwrap")
    "u"  '(sp-unwrap-sexp :wk "unwrap")
    "w"  '(sp-rewrap-sexp :wk "rewrap" )
-   ;; "x"  '(sp-split-sexp :wk )
+   ","  '(sp-split-sexp :wk "sp-split-sexp")
    ;; "Y"  '(sp-backward-copy-sexp :wk )
    ;; "y"  '(sp-copy-sexp :wk )
    ;; ","  '(sp-previous-sexp :wk )
