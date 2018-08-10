@@ -17,7 +17,13 @@
 (use-package wakatime-mode
   :init (global-wakatime-mode))
 
-(use-package ace-window)
+(use-package ace-window
+  :init
+  (setq aw-scope 'frame
+        aw-ignore-on t
+        aw-dispatch-when-more-than 3
+        aw-keys '(?h ?j ?k ?l ?u ?i ?o ?p)
+        aw-ignored-buffers '("*NeoTree*")))
 
 (use-package smartparens
   :diminish smartparens-mode

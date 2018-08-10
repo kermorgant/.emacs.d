@@ -12,7 +12,7 @@
 (setq coding-system-for-write 'utf-8 )
 (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
-(setq initial-scratch-message "Welcome") ; print a default message in the empty scratch buffer opened at startup
+(setq initial-scratch-message nil) ; print a default message in the empty scratch buffer opened at startup
 (setq use-package-always-ensure t)
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files

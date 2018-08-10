@@ -11,6 +11,10 @@
    "ig" 'evil-inner-buffer)
 
   (general-define-key
+   :states '(normal visual emacs)
+   "TAB" 'evil-indent)
+
+  (general-define-key
    :states '(normal visual insert emacs)
    :keymaps 'override
    :prefix "SPC"
@@ -56,8 +60,8 @@
 
    ;; Projects
    "p" '(:ignore t :which-key "Projects")
-   "pf" 'counsel-projectile-find-file
-   "pp" 'counsel-projectile-switch-project
+   "pf" 'projectile-find-file
+   "pp" 'projectile-switch-project
    "pl" 'persp-window-switch
 
    "nf" 'narrow-to-defun
@@ -121,6 +125,7 @@
 
 ;; move easily to previous or next buffer
 (global-set-key (kbd "M-h") 'previous-buffer)
+(global-set-key (kbd "M-j") 'mk/indent-new-comment-line)
 (global-set-key (kbd "M-l") 'next-buffer)
 (global-set-key (kbd "M-v") 'er/contract-region)
 

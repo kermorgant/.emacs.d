@@ -11,4 +11,10 @@
         (message "Indented buffer.")))
     (whitespace-cleanup)))
 
+(defun mk/indent-new-comment-line ()
+  "break line at point using c-indent-new-comment-line + indents"
+  (interactive)
+  (c-indent-new-comment-line)
+  (indent-according-to-mode))
+
 (provide 'mk-editing-defuns)

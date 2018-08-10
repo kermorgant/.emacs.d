@@ -5,10 +5,13 @@
   :delight '(:eval (concat " " (projectile-project-name)))
   :diminish  projectile-mode)
 
-(use-package counsel-projectile)
+;; (use-package counsel-projectile
+;;   :load-path "~/src/counsel-projectile/counsel-projectile.el")
+
 (use-package persp-mode
   :init
-  (setq persp-autokill-buffer-on-remove 'kill-weak
+  (setq persp-autokill-buffer-on-remove 'kill
+        persp-kill-foreign-buffer-behaviour 'kill
         persp-auto-save-opt 0
         persp-auto-resume-time -1)
   :config    (persp-mode t))
@@ -55,3 +58,4 @@
             t))
 
 (provide 'mk-project)
+;;; mk-project ends here
