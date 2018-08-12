@@ -43,31 +43,6 @@
          ;; company-lsp            ; lsp completion
          ;;company-capf
          )))
-)
-
-(defun php-class-copy ()
-  "Copy a class using phpactor"
-  (interactive)
-  (setq targetpath (read-file-name "Enter new file name:"))
-  (let ((default-directory (projectile-project-root)))
-    (start-process "phpactor"
-                   (get-buffer-create "*phpactor*")
-                   "phpactor"
-                   "class:copy"
-                   (buffer-file-name (window-buffer (minibuffer-selected-window)))
-                   targetpath)))
-
-(defun php-class-move ()
-  "Rename a class using phpactor"
-  (interactive)
-  (setq targetpath (read-file-name "Enter new file name:"))
-  (let ((default-directory (projectile-project-root)))
-    (start-process "phpactor"
-                   (get-buffer-create "*phpactor*")
-                   "phpactor"
-                   "class:move"
-                   (buffer-file-name (window-buffer (minibuffer-selected-window)))
-                   targetpath)))
 
 ;; (defun counsel-phpactor (&optional initial-input)
 ;;   "Call the \"locate\" shell command.

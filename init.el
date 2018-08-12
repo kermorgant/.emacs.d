@@ -1,4 +1,4 @@
-(setq gc-cons-threshold (* 500 1024 1024))			; increase the threshold for garbage collection - 100 MB
+(setq gc-cons-threshold (* 500 1024 1024)) ; increase the threshold for gc - 100 MB
 
 (setq delete-old-versions -1 )		; delete excess backup versions silently
 (setq version-control t )		; use version control
@@ -176,3 +176,4 @@
 (require 'mk-docker)
 
 (add-hook 'after-init-hook (lambda () (setq gc-cons-threshold (* 1 1024 1024))))
+;;; init ends here
