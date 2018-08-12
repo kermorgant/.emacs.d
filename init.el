@@ -108,10 +108,10 @@
   :after magit
   :init (setq evil-magit-want-horizontal-movement nil))
 
-(use-package diff-hl                    ; Show changes in fringe
+(use-package diff-hl                 ; Show changes in fringe
   :ensure t
   :hook ((prog-mode          . diff-hl-mode)
-         (dired-mode         . diff-hl-dired-mode)
+         ;; (dired-mode         . diff-hl-dired-mode)
          (magit-post-refresh . diff-hl-magit-post-refresh)))
 
 (use-package git-timemachine)

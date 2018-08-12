@@ -14,7 +14,7 @@
 (use-package expand-region
   :commands er/expand-region)
 
-(use-package wakatime-mode
+(use-package wakatime-mode :disabled
   :init (global-wakatime-mode))
 
 (use-package ace-window

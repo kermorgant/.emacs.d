@@ -1,9 +1,11 @@
+
 (use-package projectile
   :config
   (projectile-global-mode)
-  (setq projectile-completion-system 'ivy)
-  :delight '(:eval (concat " " (projectile-project-name)))
-  :diminish  projectile-mode)
+  (setq projectile-project-search-path '("~/src/" "~/workspace/")
+        projectile-completion-system 'ivy
+        projectile-switch-project-action #'projectile-dired
+        projectile-enable-caching t))
 
 ;; (use-package counsel-projectile
 ;;   :load-path "~/src/counsel-projectile/counsel-projectile.el")
