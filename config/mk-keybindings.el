@@ -46,12 +46,12 @@
    "fs" 'save-buffer
 
    ;; GIT
-   "g" '(:ignore t :which-key "Git")
-   "gs" 'magit-status
-   "gt" 'git-timemachine
+   "g"  '(:ignore t :which-key "Git")
+   "gs" '(magit-status :wk "status")
+   "gt" '(git-timemachine :wk "time machine")
 
    "jj" '(avy-goto-word-or-subword-1  :which-key "go to char")
-   "j=" 'mk/indent-region-or-buffer
+   "j=" 'mk/indent-region-or-buffer :wk "indent region or buffer"
 
    "ll" 'persp-switch
    "lc" 'persp-add-new
@@ -63,14 +63,16 @@
    "pf" 'projectile-find-file
    "pp" 'projectile-switch-project
    "pl" 'persp-window-switch
+   "pt" 'neotree-toggle
 
-   "nf" 'narrow-to-defun
-   "nr" 'narrow-to-region
+   "nf" '(narrow-to-defun :wk "narrow to function")
+   "nr" '(narrow-to-region :wk "narrow to region")
    "nw" 'widen
 
    "s" '(:ignore t :which-key "Search")
    "se" 'evil-iedit-state/iedit-mode
-   "sgp" 'counsel-git-grep
+   "sgp" '(counsel-git-grep :wk "git grep")
+   "sp" '(projectile-ag :wk "projectile-ag")
    "ss" 'swiper
 
    "v" 'er/expand-region
@@ -130,3 +132,4 @@
 (global-set-key (kbd "M-v") 'er/contract-region)
 
 (provide 'mk-keybindings)
+;;; mk-keybindings ends here
