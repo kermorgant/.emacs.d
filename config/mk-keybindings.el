@@ -122,7 +122,8 @@
    ))
 
 ;; ace-window-switching keybinding
-(global-set-key (kbd "M-p") 'ace-window)
+(bind-key* "M-p" 'ace-window)
+;; (global-set-key (kbd "M-p") 'ace-window)
 (progn (setq aw-scope 'frame))
 
 ;; move easily to previous or next buffer
