@@ -116,13 +116,6 @@
 
 (use-package git-timemachine)
 
-(use-package doom-themes
-  :config
-  (load-theme 'doom-one t))
-
-;; All The Icons
-(use-package all-the-icons)
-
 ;; NeoTree
 (use-package neotree
   :config
@@ -133,11 +126,6 @@
   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
-
-(use-package doom-modeline
-  :ensure t
-  :defer t
-  :hook (after-init . doom-modeline-init))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)

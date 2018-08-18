@@ -13,5 +13,18 @@
 (setq mouse-wheel-follow-mouse 't)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 
+
+(use-package doom-themes
+  :config
+  (load-theme 'doom-one t))
+
+;; All The Icons
+(use-package all-the-icons)
+
+
+(use-package doom-modeline
+  :defer t
+  :hook (after-init . doom-modeline-init))
+
 (provide 'mk-appearance)
 ;;; mk-appearance ends here
