@@ -72,7 +72,8 @@
 
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 
-(use-package prescient)
+(use-package prescient
+  :config (prescient-persist-mode t))
 (use-package ivy-prescient
   :config (ivy-prescient-mode t))
 
