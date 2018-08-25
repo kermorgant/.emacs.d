@@ -80,7 +80,9 @@
 (use-package ivy-xref
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
-(use-package counsel)
+(use-package counsel
+  :config
+  (setq counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
 
 ;; projectile and persp-mode configuration
 (require 'mk-project)
