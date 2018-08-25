@@ -80,9 +80,11 @@
 (use-package ivy-xref
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
+;; use ripgrep configured to avoid lines longer than arbitrary limit
 (use-package counsel
   :config
-  (setq counsel-grep-base-command "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
+  (setq counsel-grep-base-command "rg -i -M 240 --no-heading --line-number --color never '%s' %s"
+        counsel-rg-base-command "rg -S -M 240 --no-heading --line-number --color never %s ."))
 
 ;; projectile and persp-mode configuration
 (require 'mk-project)
