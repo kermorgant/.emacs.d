@@ -44,6 +44,8 @@
          ;;company-capf
          )))
 
+(use-package geben)
+
 ;; (defun counsel-phpactor (&optional initial-input)
 ;;   "Call the \"locate\" shell command.
 ;; INITIAL-INPUT can be given as the initial minibuffer input."
