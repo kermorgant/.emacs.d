@@ -7,8 +7,7 @@
         projectile-switch-project-action #'projectile-dired
         projectile-enable-caching t))
 
-;; (use-package counsel-projectile
-;;   :load-path "~/src/counsel-projectile/counsel-projectile.el")
+(use-package counsel-projectile)
 
 (use-package persp-mode
   :init

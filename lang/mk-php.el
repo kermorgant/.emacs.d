@@ -5,7 +5,9 @@
   ((php-mode . mk/company-php)
    (php-mode . php-enable-symfony2-coding-style))
   :init
-  (setq flycheck-phpcs-standard "PSR2")
+  (setq flycheck-phpcs-standard "PSR2"
+        geben-pause-at-entry-line nil)
+
   :config
   (add-hook 'php-mode-hook
             (sp-with-modes '(php-mode)
@@ -16,6 +18,31 @@
               (kbd "M-.") 'phpactor-goto-definition
               (kbd "M-/") 'company-phpactor
               (kbd "s-,") 'phpactor-context-menu)
+
+            (general-define-key
+              :states 'normal
+              :prefix "SPC d"
+              :keymaps 'php-mode-map
+              "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
+              "c" '(geben-clear-predefined-breakpoints :wk "clear breakpoints")
+              "d" '(geben :wk "start debugging")
+              "q" '(geben-end :wk "quit debugging")
+              "r" '(geben-run :wk "run")
+              "x" '(geben-stop :wk "stop")
+              "o" '(geben-step-over :wk "step over")
+              "i" '(geben-step-into :wk "step into")
+              "u" '(geben-step-out :wk "step out")
+              "v" '(geben-display-context :wk "context")
+              "w" '(geben-display-window-function :wk "window"))
+
+            (general-define-key
+              :states 'normal
+              :prefix ","
+              :keymaps 'php-mode-map
+              "sc" '(phpactor-move-class :wk "rename class")
+              ;; "sv" '(phpactor-move-class :wk "rename variable")
+              "cc" '(phpactor-complete-constructor :wk "complete constructor"))
+
             (require 'flycheck-phpstan)
             (flycheck-mode t)
             (flycheck-select-checker 'phpstan)))
