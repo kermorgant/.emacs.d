@@ -34,7 +34,8 @@
         (evilnc-comment-or-uncomment-lines arg)))
     ))
 
-(use-package evil-iedit-state)
+(use-package evil-iedit-state
+  :config (setq iedit-toggle-key-default nil))
 
 (use-package evil-smartparens
   :after smartparens
