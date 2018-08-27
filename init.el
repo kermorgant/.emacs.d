@@ -72,14 +72,19 @@
 
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 
-(use-package prescient)
+(use-package prescient
+  :config (prescient-persist-mode t))
 (use-package ivy-prescient
   :config (ivy-prescient-mode t))
 
 (use-package ivy-xref
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
-(use-package counsel)
+;; use ripgrep configured to avoid lines longer than arbitrary limit
+(use-package counsel
+  :config
+  (setq counsel-grep-base-command "rg -i -M 240 --no-heading --line-number --color never '%s' %s"
+        counsel-rg-base-command "rg -S -M 240 --no-heading --line-number --color never %s ."))
 
 ;; projectile and persp-mode configuration
 (require 'mk-project)
