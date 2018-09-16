@@ -7,7 +7,8 @@
         evil-split-window-below t
         evil-shift-round nil
         evil-want-C-u-scroll t
-        evil-want-integration nil)
+        evil-want-integration t
+        evil-want-keybinding nil)
   :config ;; tweak evil after loading it
   (evil-mode)
   (evil-define-text-object evil-inner-buffer (count &optional beg end type)

@@ -109,6 +109,16 @@
 
 (use-package magit-gitflow)
 
+(use-package magit-todos
+  :disabled
+  :after magit
+  :config
+  (with-eval-after-load 'magit-todos (require 'evil-collection-magit-todos))
+  (setq magit-todos-require-colon nil
+        magit-todos-keywords (list "HOLD" "TODO" "@todo" "FIXME" ))
+  :init
+  (magit-todos-mode t))
+
 (use-package evil-magit
   :after magit
   :init (setq evil-magit-want-horizontal-movement nil))
@@ -124,7 +134,7 @@
 ;; NeoTree
 (use-package neotree
   :config
-  (with-eval-after-load 'calendar (require 'evil-collection-neotree))
+  (with-eval-after-load 'neotree (require 'evil-collection-neotree))
   :init
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
