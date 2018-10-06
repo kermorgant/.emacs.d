@@ -31,8 +31,7 @@
   (progn
     (require 'smartparens-config)
     (setq smartparens-strict-mode t)
-    (smartparens-global-mode 1)
-    ))
+    (smartparens-global-mode 1)))
 
 (global-subword-mode 1)
 (winner-mode 1)
