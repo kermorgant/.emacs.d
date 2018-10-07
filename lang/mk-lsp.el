@@ -2,7 +2,7 @@
   :ensure t
   :defer t
   :config (progn
-            (add-hook 'vue-mode-hook 'lsp-mode)
+            ;; (add-hook 'vue-mode-hook 'lsp-mode)
             (set-face-attribute 'lsp-face-highlight-textual nil
                                 :background "#666" :foreground "#ffffff"
                                 )

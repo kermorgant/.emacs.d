@@ -3,7 +3,7 @@
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)
          ("\\.html\\.twig\\'" . web-mode)
-         ("\\.vue\\'" . web-mode)
+         ;; ("\\.vue\\'" . web-mode)
          ("\\.tsx\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
   :init
