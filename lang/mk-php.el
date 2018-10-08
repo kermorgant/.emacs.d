@@ -1,5 +1,6 @@
 (use-package php-mode
   :defer t
+  :after (php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook
   ((php-mode . mk/company-php)
@@ -7,8 +8,9 @@
   :init
   (setq flycheck-phpcs-standard "PSR2"
         geben-pause-at-entry-line nil)
-
   :config
+  (add-hook 'php-mode-hook
+            (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local)))
   (add-hook 'php-mode-hook
             (sp-with-modes '(php-mode)
               ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
@@ -47,15 +49,23 @@
             (flycheck-mode t)
             (flycheck-select-checker 'phpstan)))
 
-(use-package phpactor :ensure nil
+;; (use-package composer :ensure nil
+;;   :load-path "~/src/composer.el")
+
+(use-package phpactor
   :load-path "~/src/phpactor.el")
 
 (use-package company-phpactor :ensure nil
   :load-path "~/src/phpactor.el")
 
+(use-package php-cs-fixer :ensure nil
+  :load-path "~/src/php-cs-fixer.el"
+  :config (setq php-cs-fixer--executable "~/.config/composer/vendor/bin/php-cs-fixer"))
+
+
 (use-package flycheck-phpstan
-  :config
-  (setq phpstan-executable "~/bin/phpstan"))
+  :after (php-mode flycheck)
+  :config (setq phpstan-executable "~/bin/phpstan"))
 
 (defun mk/company-php ()
   "Add backends for php completion in company mode"

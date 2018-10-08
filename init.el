@@ -110,14 +110,13 @@
 (use-package magit-gitflow)
 
 (use-package magit-todos
-  :disabled
   :after magit
+  :init
+  (setq magit-todos-require-colon nil)
+  (magit-todos-mode t)
   :config
   (with-eval-after-load 'magit-todos (require 'evil-collection-magit-todos))
-  (setq magit-todos-require-colon nil
-        magit-todos-keywords (list "HOLD" "TODO" "@todo" "FIXME" ))
-  :init
-  (magit-todos-mode t))
+ )
 
 (use-package evil-magit
   :after magit
