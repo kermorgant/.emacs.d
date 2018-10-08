@@ -132,6 +132,7 @@
 (global-set-key (kbd "M-j") 'mk/indent-new-comment-line)
 (global-set-key (kbd "M-l") 'next-buffer)
 (global-set-key (kbd "M-v") 'er/contract-region)
+(global-set-key (kbd "M-y") 'counsel-yank-pop)
 
 (provide 'mk-keybindings)
 ;;; mk-keybindings ends here
