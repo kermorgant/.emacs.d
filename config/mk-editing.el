@@ -33,6 +33,8 @@
     (setq smartparens-strict-mode t)
     (smartparens-global-mode 1)))
 
+(use-package wgrep)
+
 (global-subword-mode 1)
 (winner-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
