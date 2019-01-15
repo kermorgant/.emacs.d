@@ -2,9 +2,11 @@
   :defer t
   :after (php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
-  :hook
-  ((php-mode . mk/company-php)
-   (php-mode . php-enable-symfony2-coding-style))
+  :hook (
+         ;; (php-mode . lsp-mode)
+         ;; (php-mode . lsp-php-enable)
+         (php-mode . mk/company-php)
+         (php-mode . php-enable-symfony2-coding-style))
   :init
   (setq flycheck-phpcs-standard "PSR2"
         geben-pause-at-entry-line nil)
@@ -22,28 +24,29 @@
               (kbd "s-,") 'phpactor-context-menu)
 
             (general-define-key
-              :states 'normal
-              :prefix "SPC d"
-              :keymaps 'php-mode-map
-              "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
-              "c" '(geben-clear-predefined-breakpoints :wk "clear breakpoints")
-              "d" '(geben :wk "start debugging")
-              "q" '(geben-end :wk "quit debugging")
-              "r" '(geben-run :wk "run")
-              "x" '(geben-stop :wk "stop")
-              "o" '(geben-step-over :wk "step over")
-              "i" '(geben-step-into :wk "step into")
-              "u" '(geben-step-out :wk "step out")
-              "v" '(geben-display-context :wk "context")
-              "w" '(geben-display-window-function :wk "window"))
+             :states 'normal
+             :prefix "SPC d"
+             :keymaps 'php-mode-map
+             "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
+             "c" '(geben-clear-predefined-breakpoints :wk "clear breakpoints")
+             "d" '(geben :wk "start debugging")
+             "q" '(geben-end :wk "quit debugging")
+             "r" '(geben-run :wk "run")
+             "x" '(geben-stop :wk "stop")
+             "o" '(geben-step-over :wk "step over")
+             "i" '(geben-step-into :wk "step into")
+             "u" '(geben-step-out :wk "step out")
+             "v" '(geben-display-context :wk "context")
+             "w" '(geben-display-window-function :wk "window"))
 
             (general-define-key
-              :states 'normal
-              :prefix ","
-              :keymaps 'php-mode-map
-              "sc" '(phpactor-move-class :wk "rename class")
-              ;; "sv" '(phpactor-move-class :wk "rename variable")
-              "cc" '(phpactor-complete-constructor :wk "complete constructor"))
+             :states 'normal
+             :prefix ","
+             :keymaps 'php-mode-map
+             "sc" '(phpactor-move-class :wk "rename class")
+             ;; "sv" '(phpactor-move-class :wk "rename variable")
+             "cc" '(phpactor-complete-constructor :wk "complete constructor"))
+
 
             (require 'flycheck-phpstan)
             (flycheck-mode t)
@@ -60,19 +63,36 @@
 
 (use-package php-cs-fixer :ensure nil
   :load-path "~/src/php-cs-fixer.el"
-  :config (setq php-cs-fixer--executable "~/.config/composer/vendor/bin/php-cs-fixer"))
+  :config (setq php-cs-fixer--enable nil))
 
 
 (use-package flycheck-phpstan
   :after (php-mode flycheck)
   :config (setq phpstan-executable "~/bin/phpstan"))
 
+
+;; (use-package lsp-php :ensure nil
+;;   :load-path "~/src/lsp-php"
+;;   :demand
+;;   :config
+;;   (setq lsp-php-show-file-parse-notifications t)
+;;   (setq extra-init-params '(:index 2))
+;;   (setq lsp-php-language-server-command '(
+;;                                           "php"
+;;                                           "/home/mikael/src/phpactor.el/vendor/bin/phpactor"
+;;                                           "server:start"
+;;                                           "--stdio"
+;;                                           "-vvv"
+;;                                           ))
+;;   (setq lsp-php-workspace-root-detectors '(lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robots.txt")))
+
 (defun mk/company-php ()
-  "Add backends for php completion in company mode"
+  "Add backends for php completion in company mode."
   (interactive)
   (require 'company)
   (set (make-local-variable 'company-backends)
        '(;; list of backends
+         ;; company-lsp
          company-phpactor
          company-files
          ;; company-keywords       ; keywords

@@ -37,5 +37,7 @@
 (winner-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(use-package dist-file-mode)
+
 (provide 'mk-editing)
 ;;; mk-editing ends here

@@ -1,14 +1,7 @@
-(use-package lsp-mode
-  :ensure t
-  :defer t
-  :config (progn
-            ;; (add-hook 'vue-mode-hook 'lsp-mode)
-            (set-face-attribute 'lsp-face-highlight-textual nil
-                                :background "#666" :foreground "#ffffff"
-                                )
-            ))
+(use-package lsp-mode :defer t)
 
 (use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-enable nil
         lsp-ui-doc-enable nil

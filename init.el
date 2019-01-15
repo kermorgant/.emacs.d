@@ -177,5 +177,8 @@
 ;; docker
 (require 'mk-docker)
 
+;; behat
+(require 'mk-cucumber)
+
 (add-hook 'after-init-hook (lambda () (setq gc-cons-threshold (* 1 1024 1024))))
 ;;; init ends here

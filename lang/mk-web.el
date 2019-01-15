@@ -1,4 +1,4 @@
-;;; essentially web-mode
+;;; mk-web --- essentially web-mode
 
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)
@@ -17,7 +17,7 @@
         web-mode-enable-current-column-highlight t)
   (add-hook 'web-mode-hook
             (general-define-key
-             :states '(normal visual insert)
+             :states '(normal visual)
              :prefix "SPC"
              :keymaps 'web-mode-map
              "mrc" '(web-mode-element-clone :wk "element-clone")
