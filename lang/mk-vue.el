@@ -1,3 +1,4 @@
-(use-package vue-mode)
+;; (use-package vue-mode)
+;;
 
 (provide 'mk-vue)
