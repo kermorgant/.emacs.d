@@ -70,6 +70,12 @@
         ivy-use-virtual-buffers t)
   (bind-key "C-c C-r" 'ivy-resume))
 
+(use-package hydra)
+
+(use-package ivy-hydra
+    :after (ivy hydra))
+
+(define-key ivy-minibuffer-map (kbd "C-o") 'hydra-ivy/body)
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 
 (use-package prescient
