@@ -2,10 +2,7 @@
   :defer t
   :after (php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
-  :hook (
-         ;; (php-mode . lsp-mode)
-         ;; (php-mode . lsp-php-enable)
-         (php-mode . mk/company-php)
+  :hook ((php-mode . mk/company-php)
          (php-mode . php-enable-symfony2-coding-style))
   :init
   (setq flycheck-phpcs-standard "PSR2"
@@ -58,8 +55,9 @@
 (use-package phpactor
   :load-path "~/src/phpactor.el")
 
-(use-package company-phpactor :ensure nil
-  :load-path "~/src/phpactor.el")
+(use-package company-phpactor ; :ensure nil
+   ;; :load-path "~/src/phpactor.el"
+   )
 
 (use-package php-cs-fixer :ensure nil
   :load-path "~/src/php-cs-fixer.el"
@@ -90,6 +88,7 @@
   "Add backends for php completion in company mode."
   (interactive)
   (require 'company)
+  (require 'company-phpactor)
   (set (make-local-variable 'company-backends)
        '(;; list of backends
          ;; company-lsp
