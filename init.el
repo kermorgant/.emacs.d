@@ -53,7 +53,10 @@
 (add-to-list 'load-path
              (expand-file-name "defuns" user-emacs-directory))
 
-(use-package which-key)
+(use-package exec-path-from-shell
+  :init
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (require 'mk-appearance)
 
@@ -73,7 +76,7 @@
 (use-package hydra)
 
 (use-package ivy-hydra
-    :after (ivy hydra))
+  :after (ivy hydra))
 
 (define-key ivy-minibuffer-map (kbd "C-o") 'hydra-ivy/body)
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
@@ -122,7 +125,7 @@
   (magit-todos-mode t)
   :config
   (with-eval-after-load 'magit-todos (require 'evil-collection-magit-todos))
- )
+  )
 
 (use-package evil-magit
   :after magit

@@ -60,7 +60,7 @@
 (defun my/web-vue-setup()
   "Setup for js related."
   (message "web-mode use vue related setup")
-  ;; (setup-tide-mode)
+  (setup-tide-mode)
   (prettier-js-mode)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-select-checker 'javascript-eslint)
@@ -81,6 +81,31 @@
                            "--bracket-spacing" "false"
                            "--tab-width" "4"
                            ))
+  )
+
+(defun setup-tide-mode ()
+  "Setup tide mode for other mode."
+  (interactive)
+  (message "setup tide mode")
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(use-package tide
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode))
+  ;;(before-save . tide-format-before-save))
+  :config
+  (setq tide-completion-enable-autoimport-suggestions t)
   )
 
 (provide 'mk-web)

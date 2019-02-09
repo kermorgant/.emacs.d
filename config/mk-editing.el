@@ -1,3 +1,6 @@
+
+(use-package which-key)
+
 (use-package highlight-indentation
   :hook
   ((yaml-mode . highlight-indentation-mode)
