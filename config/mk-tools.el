@@ -2,5 +2,7 @@
 
 (use-package tomatinho)
 
+(use-package org-pomodoro)
+
 (provide 'mk-tools)
 ;;; mk-tools ends here
