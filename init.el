@@ -189,6 +189,9 @@
 ;; behat
 (require 'mk-cucumber)
 
+;; scala
+(require 'mk-scala)
+
 ;; tools
 (require 'mk-tools)
 
