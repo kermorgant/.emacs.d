@@ -12,9 +12,10 @@
     (whitespace-cleanup)))
 
 (defun mk/indent-new-comment-line ()
-  "break line at point using c-indent-new-comment-line + indents"
+  "Break line at point using c-indent-new-comment-line + indent."
   (interactive)
   (c-indent-new-comment-line)
   (indent-according-to-mode))
 
 (provide 'mk-editing-defuns)
+;;; mk-editing-defuns ends here

@@ -20,11 +20,13 @@
 (setq-default indent-tabs-mode nil)
 (setq use-dialog-box nil)
 (setq package-enable-at-startup nil) ; tells emacs not to load any packages before starting up
+(setq iedit-toggle-key-default nil)
 ;; the following lines tell emacs where on the internet to look up
 ;; for new packages.
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
                          ("gnu"       . "http://elpa.gnu.org/packages/")
                          ("melpa"     . "https://melpa.org/packages/")))
+(defalias 'yes-or-no-p 'y-or-n-p)
 (put 'narrow-to-region 'disabled nil)
 
 (package-initialize) ; guess what this one does ?
@@ -110,35 +112,6 @@
         eyebrowse-new-workspace t)
   (eyebrowse-mode t))
 
-(use-package magit
-  :init
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-  (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
-  :config (setq magit-completing-read-function 'ivy-completing-read))
-
-(use-package magit-gitflow)
-
-(use-package magit-todos
-  :after magit
-  :init
-  (setq magit-todos-require-colon nil)
-  (magit-todos-mode t)
-  :config
-  (with-eval-after-load 'magit-todos (require 'evil-collection-magit-todos))
-  )
-
-(use-package evil-magit
-  :after magit
-  :init (setq evil-magit-want-horizontal-movement nil))
-
-(use-package diff-hl                 ; Show changes in fringe
-  :ensure t
-  :hook ((prog-mode          . diff-hl-mode)
-         ;; (dired-mode         . diff-hl-dired-mode)
-         (magit-post-refresh . diff-hl-magit-post-refresh)))
-
-(use-package git-timemachine)
-
 ;; NeoTree
 (use-package neotree
   :config
@@ -152,6 +125,8 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+(require 'mk-git)
 
 ;; editing defuns
 (require 'mk-editing-defuns)
