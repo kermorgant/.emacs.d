@@ -50,7 +50,7 @@
    "gs" '(magit-status :wk "status")
    "gt" '(git-timemachine :wk "time machine")
 
-   "jj" '(avy-goto-word-or-subword-1  :which-key "go to char")
+   "jj" '(avy-goto-word-1 :which-key "go to char")
    "j=" 'mk/indent-region-or-buffer :wk "indent region or buffer"
 
    "ll" 'persp-switch
