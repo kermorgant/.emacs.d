@@ -62,7 +62,7 @@
    "p" '(:ignore t :which-key "Projects")
    "pb" '(counsel-projectile-switch-to-buffer :which-key "buffers")
    "pf" 'projectile-find-file
-   "pp" 'counsel-projectile-switch-project
+   "pp" 'projectile-persp-switch-project
    "pl" 'persp-window-switch
    "pt" 'neotree-toggle
 
