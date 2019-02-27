@@ -12,6 +12,7 @@
 
   (general-define-key
    :states '(normal visual emacs)
+   "*"   'symbol-overlay-put
    "TAB" 'evil-indent)
 
   (general-define-key

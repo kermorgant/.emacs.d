@@ -1,3 +1,6 @@
+(global-subword-mode 1)
+(winner-mode 1)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package which-key)
 
@@ -38,9 +41,10 @@
 
 (use-package wgrep)
 
-(global-subword-mode 1)
-(winner-mode 1)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(use-package symbol-overlay
+  :general
+  (:keymaps 'symbol-overlay-mode-map
+            "r" 'symbol-overlay-rename))
 
 (use-package dist-file-mode)
 

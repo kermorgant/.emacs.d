@@ -5,20 +5,29 @@
   :hook ((php-mode . mk/company-php)
          (php-mode . php-enable-symfony2-coding-style))
   :init
+  (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
   (setq flycheck-phpcs-standard "PSR2"
         geben-pause-at-entry-line nil)
+  :general
+  (:keymaps 'php-mode-map :states 'normal :prefix ","
+             "sc" '(phpactor-move-class :wk "rename class")
+             "f" '(phpactor-fix-namespace :wk "fix namespace")
+             "ca" '(phpactor-generate-accessors :wk "generate accessor")
+             "cc" '(phpactor-complete-constructor :wk "complete constructor"))
+  (:keymaps 'php-mode-map :states '(insert normal)
+            "s-," 'phpactor-context-menu
+            "M-/" 'company-phpactor
+            ;; TODO https://github.com/jojojames/smart-jump + https://github.com/Fuco1/.emacs.d/commit/1193e989d64fa3f505be593b2b5f7f3ad60946ce
+            "M-." 'phpactor-goto-definition)
   :config
   (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local)))
   (add-hook 'php-mode-hook
             (sp-with-modes '(php-mode)
+              ;;TODO  https://github.com/Fuco1/.emacs.d/commit/9f24b9ceb03b2ef2fbd40ac6c5f4bd39c0719f80
               ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
               (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
               (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET"))))
-            (evil-define-key '(insert normal) php-mode-map
-              (kbd "M-.") 'phpactor-goto-definition
-              (kbd "M-/") 'company-phpactor
-              (kbd "s-,") 'phpactor-context-menu)
 
             (general-define-key
              :states 'normal
@@ -36,18 +45,9 @@
              "v" '(geben-display-context :wk "context")
              "w" '(geben-display-window-function :wk "window"))
 
-            (general-define-key
-             :states 'normal
-             :prefix ","
-             :keymaps 'php-mode-map
-             "sc" '(phpactor-move-class :wk "rename class")
-             ;; "sv" '(phpactor-move-class :wk "rename variable")
-             "cc" '(phpactor-complete-constructor :wk "complete constructor"))
-
-
+            ;; TODO compare with https://github.com/Fuco1/.emacs.d/commit/a4c83a10a959e3ce1d572cc48429d41632b5768e
             (require 'flycheck-phpstan)
-            (flycheck-mode t)
-            (flycheck-select-checker 'phpstan)))
+            (flycheck-mode t)))
 
 ;; (use-package composer :ensure nil
 ;;   :load-path "~/src/composer.el")
