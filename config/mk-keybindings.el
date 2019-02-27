@@ -12,8 +12,7 @@
 
   (general-define-key
    :states '(normal visual emacs)
-   "*"   'symbol-overlay-put
-   "TAB" 'evil-indent)
+   "*"   'symbol-overlay-put)
 
   (general-define-key
    :states '(normal visual insert emacs)
@@ -125,7 +124,6 @@
 
 ;; ace-window-switching keybinding
 (bind-key* "M-p" 'ace-window)
-;; (global-set-key (kbd "M-p") 'ace-window)
 (progn (setq aw-scope 'frame))
 
 ;; move easily to previous or next buffer

@@ -10,10 +10,10 @@
         geben-pause-at-entry-line nil)
   :general
   (:keymaps 'php-mode-map :states 'normal :prefix ","
-             "sc" '(phpactor-move-class :wk "rename class")
-             "f" '(phpactor-fix-namespace :wk "fix namespace")
-             "ca" '(phpactor-generate-accessors :wk "generate accessor")
-             "cc" '(phpactor-complete-constructor :wk "complete constructor"))
+            "sc" '(phpactor-move-class :wk "rename class")
+            "f" '(phpactor-fix-namespace :wk "fix namespace")
+            "ca" '(phpactor-generate-accessors :wk "generate accessor")
+            "cc" '(phpactor-complete-constructor :wk "complete constructor"))
   (:keymaps 'php-mode-map :states '(insert normal)
             "s-," 'phpactor-context-menu
             "M-/" 'company-phpactor
@@ -56,8 +56,8 @@
   :load-path "~/src/phpactor.el")
 
 (use-package company-phpactor ; :ensure nil
-   ;; :load-path "~/src/phpactor.el"
-   )
+  ;; :load-path "~/src/phpactor.el"
+  )
 
 (use-package php-cs-fixer :ensure nil
   :load-path "~/src/php-cs-fixer.el"
