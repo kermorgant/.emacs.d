@@ -21,6 +21,7 @@
 (setq use-dialog-box nil)
 (setq package-enable-at-startup nil) ; tells emacs not to load any packages before starting up
 (setq iedit-toggle-key-default nil)
+(setq dired-dwim-target t) ;;  If non-nil, Dired tries to guess a default target directory
 ;; the following lines tell emacs where on the internet to look up
 ;; for new packages.
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
