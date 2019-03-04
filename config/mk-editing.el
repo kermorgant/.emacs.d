@@ -48,5 +48,9 @@
 
 (use-package dist-file-mode)
 
+(use-package smart-jump
+  :config
+  (smart-jump-setup-default-registers))
+
 (provide 'mk-editing)
 ;;; mk-editing ends here

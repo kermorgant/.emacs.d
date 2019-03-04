@@ -3,6 +3,7 @@
   :after (php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
+         (php-mode . mk/smartjump-php)
          (php-mode . php-enable-symfony2-coding-style))
   :init
   (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
@@ -17,8 +18,7 @@
   (:keymaps 'php-mode-map :states '(insert normal)
             "s-," 'phpactor-context-menu
             "M-/" 'company-phpactor
-            ;; TODO https://github.com/jojojames/smart-jump + https://github.com/Fuco1/.emacs.d/commit/1193e989d64fa3f505be593b2b5f7f3ad60946ce
-            "M-." 'phpactor-goto-definition)
+            "M-." 'smart-jump-go)
   :config
   (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local)))
@@ -49,6 +49,7 @@
             (require 'flycheck-phpstan)
             (flycheck-mode t)))
 
+
 ;; (use-package composer :ensure nil
 ;;   :load-path "~/src/composer.el")
 
@@ -68,7 +69,16 @@
   :after (php-mode flycheck)
   :config (setq phpstan-executable "~/bin/phpstan"))
 
-
+(defun mk/smartjump-php ()
+  "Registers smartjump function for php."
+  (smart-jump-register :modes '(php-mode yaml-mode)
+                       :jump-fn 'phpactor-goto-definition
+                       ;; :pop-fn 'ggtags-prev-mark
+                       :refs-fn 'phpactor-find-references
+                       :should-jump t
+                       :heuristic 'point
+                       ;; :async 500
+                       :order 1))
 ;; (use-package lsp-php :ensure nil
 ;;   :load-path "~/src/lsp-php"
 ;;   :demand
