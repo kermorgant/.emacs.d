@@ -11,12 +11,15 @@
         geben-pause-at-entry-line nil)
   :general
   (:keymaps 'php-mode-map :states 'normal :prefix ","
+            "m" '(phpactor-context-menu :wk "context menu")
+            "nc" '(phpactor-create-new-class :wk "new class")
+            "ni" '(phpactor-inflect-class :wk "inflect interface")
+            "ec" '(phpactor-extract-constant :wk "extract constant")
             "sc" '(phpactor-move-class :wk "rename class")
             "f" '(phpactor-fix-namespace :wk "fix namespace")
             "ca" '(phpactor-generate-accessors :wk "generate accessor")
             "cc" '(phpactor-complete-constructor :wk "complete constructor"))
   (:keymaps 'php-mode-map :states '(insert normal)
-            "s-," 'phpactor-context-menu
             "M-/" 'company-phpactor
             "M-." 'smart-jump-go)
   :config
