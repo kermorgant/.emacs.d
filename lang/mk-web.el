@@ -6,9 +6,8 @@
          ("\\.vue\\'" . web-mode)
          ("\\.tsx\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
-  :init
-  (add-to-list 'company-backends 'company-web-html)
-  (setq web-mode-markup-indent-offset 2
+  :config
+  (setq web-mode-markup-indent-offset 4
         web-mode-enable-css-colorization t
         web-mode-enable-current-element-highlight t
         web-mode-css-indent-offset 4
@@ -17,6 +16,8 @@
         web-mode-enable-auto-pairing nil
         web-mode-enable-current-element-highlight t
         web-mode-enable-current-column-highlight t)
+  :init
+  (add-to-list 'company-backends 'company-web-html)
   (add-hook 'web-mode-hook
             (general-define-key
              :states '(normal visual)

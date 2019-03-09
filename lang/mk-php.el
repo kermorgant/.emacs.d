@@ -12,16 +12,30 @@
   :general
   (:keymaps 'php-mode-map :states 'normal :prefix ","
             "m" '(phpactor-context-menu :wk "context menu")
-            "nc" '(phpactor-create-new-class :wk "new class")
-            "ni" '(phpactor-inflect-class :wk "inflect interface")
+            ;; "cc" '(phpactor-copy-class :wk "class copy")
+            "cn" '(phpactor-create-new-class :wk "class new")
+            "ci" '(phpactor-inflect-class :wk "class inflect")
+            "cr" '(phpactor-move-class :wk "class rename")
             "ec" '(phpactor-extract-constant :wk "extract constant")
-            "sc" '(phpactor-move-class :wk "rename class")
             "f" '(phpactor-fix-namespace :wk "fix namespace")
-            "ca" '(phpactor-generate-accessors :wk "generate accessor")
-            "cc" '(phpactor-complete-constructor :wk "complete constructor"))
+            "ga" '(phpactor-generate-accessors :wk "generate accessor")
+            "gc" '(phpactor-complete-constructor :wk "constructor complete")
+            "gm" '(phpactor-generate-method :wk "generate method"))
   (:keymaps 'php-mode-map :states '(insert normal)
             "M-/" 'company-phpactor
             "M-." 'smart-jump-go)
+  (:keymaps 'php-mode-map :states 'normal :prefix "SPC d"
+            "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
+            "c" '(geben-clear-predefined-breakpoints :wk "clear breakpoints")
+            "d" '(geben :wk "start debugging")
+            "q" '(geben-end :wk "quit debugging")
+            "r" '(geben-run :wk "run")
+            "x" '(geben-stop :wk "stop")
+            "o" '(geben-step-over :wk "step over")
+            "i" '(geben-step-into :wk "step into")
+            "u" '(geben-step-out :wk "step out")
+            "v" '(geben-display-context :wk "context")
+            "w" '(geben-display-window-function :wk "window"))
   :config
   (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local)))
@@ -31,27 +45,9 @@
               ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
               (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
               (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET"))))
-
-            (general-define-key
-             :states 'normal
-             :prefix "SPC d"
-             :keymaps 'php-mode-map
-             "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
-             "c" '(geben-clear-predefined-breakpoints :wk "clear breakpoints")
-             "d" '(geben :wk "start debugging")
-             "q" '(geben-end :wk "quit debugging")
-             "r" '(geben-run :wk "run")
-             "x" '(geben-stop :wk "stop")
-             "o" '(geben-step-over :wk "step over")
-             "i" '(geben-step-into :wk "step into")
-             "u" '(geben-step-out :wk "step out")
-             "v" '(geben-display-context :wk "context")
-             "w" '(geben-display-window-function :wk "window"))
-
             ;; TODO compare with https://github.com/Fuco1/.emacs.d/commit/a4c83a10a959e3ce1d572cc48429d41632b5768e
             (require 'flycheck-phpstan)
             (flycheck-mode t)))
-
 
 ;; (use-package composer :ensure nil
 ;;   :load-path "~/src/composer.el")
@@ -72,16 +68,40 @@
   :after (php-mode flycheck)
   :config (setq phpstan-executable "~/bin/phpstan"))
 
+(defvar smart-jump-phpactor-current-point nil "The current point.")
+
+(defun smart-jump-phpactor-available-p ()
+  "Return whether or not `phpmode' is available."
+  (bound-and-true-p php-mode))
+
+(defun smart-jump-phpactor-save-state ()
+  "Save some state for `smart-jump'."
+  (setq smart-jump-phpactor-current-point (point)))
+
+(defun smart-jump-phpactor-find-references-succeeded-p ()
+  "Return whether or not `phpactor-find-references' succeeded."
+  (cond
+   ((not (eq smart-jump-phpactor-current-point (point)))
+    :succeeded)
+   ((and (get-buffer "*Phpactor references*")
+         (get-buffer-window (get-buffer "*Phpactor references*")))
+    :succeeded)
+   (:default nil)))
+
 (defun mk/smartjump-php ()
   "Registers smartjump function for php."
   (smart-jump-register :modes '(php-mode yaml-mode)
                        :jump-fn 'phpactor-goto-definition
                        ;; :pop-fn 'ggtags-prev-mark
                        :refs-fn 'phpactor-find-references
+                       ;; :before-jump-fn #'smart-jump-phpactor-save-state
+                       ;; :should-jump #'smart-jump-phpactor-available-p
                        :should-jump t
                        :heuristic 'point
-                       ;; :async 500
+                       ;; :refs-heuristic #'smart-jump-phpactor-find-references-succeeded-p
+                       :async nil
                        :order 1))
+
 ;; (use-package lsp-php :ensure nil
 ;;   :load-path "~/src/lsp-php"
 ;;   :demand
