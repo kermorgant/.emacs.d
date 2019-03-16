@@ -40,11 +40,17 @@
   (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local)))
   (add-hook 'php-mode-hook
+            (lambda ()
+              (make-local-variable 'eldoc-documentation-function)
+              (setq eldoc-documentation-function
+                    'phpactor-hover)))
+  (add-hook 'php-mode-hook
             (sp-with-modes '(php-mode)
               ;;TODO  https://github.com/Fuco1/.emacs.d/commit/9f24b9ceb03b2ef2fbd40ac6c5f4bd39c0719f80
               ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
               (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
               (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET"))))
+
             ;; TODO compare with https://github.com/Fuco1/.emacs.d/commit/a4c83a10a959e3ce1d572cc48429d41632b5768e
             (require 'flycheck-phpstan)
             (flycheck-mode t)))

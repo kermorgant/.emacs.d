@@ -24,7 +24,7 @@
    ;; "" '(nil :which-key "my lieutenant general prefix")
    "'"   '(iterm-focus :which-key "iterm")
    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-   "/"   'counsel-rg
+   "/"   'counsel-git-grep
    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
    "SPC" '(counsel-M-x  :which-key "M-x")
 
