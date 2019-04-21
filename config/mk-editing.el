@@ -2,9 +2,11 @@
 (winner-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(use-package which-key)
+(use-package which-key
+  :defer t)
 
 (use-package highlight-indentation
+  :defer t
   :hook
   ((yaml-mode . highlight-indentation-mode)
    (yaml-mode . highlight-indentation-current-column-mode)
@@ -12,18 +14,23 @@
    (docker-compose-mode . highlight-indentation-current-column-mode)))
 
 (use-package rainbow-mode
+  :defer t
   :delight)
 
 (use-package flycheck
+  :defer t
   :init (global-flycheck-mode))
 
 (use-package expand-region
+  :defer t
   :commands er/expand-region)
 
 (use-package wakatime-mode
+  :defer t
   :init (global-wakatime-mode))
 
 (use-package ace-window
+  :defer t
   :init
   (setq aw-scope 'frame
         aw-ignore-on t
@@ -32,6 +39,7 @@
         aw-ignored-buffers '("*NeoTree*")))
 
 (use-package smartparens
+  :defer t
   :diminish smartparens-mode
   :config
   (progn
@@ -39,16 +47,20 @@
     (setq smartparens-strict-mode t)
     (smartparens-global-mode 1)))
 
-(use-package wgrep)
+(use-package wgrep
+  :defer t)
 
 (use-package symbol-overlay
+  :defer t
   :general
   (:keymaps 'symbol-overlay-mode-map
             "r" 'symbol-overlay-rename))
 
-(use-package dist-file-mode)
+(use-package dist-file-mode
+  :defer t)
 
 (use-package smart-jump
+  :defer t
   :config
   (smart-jump-setup-default-registers))
 

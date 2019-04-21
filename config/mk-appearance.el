@@ -13,14 +13,13 @@
 (setq mouse-wheel-follow-mouse 't)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
 
-
 (use-package doom-themes
   :config
   (load-theme 'doom-one t))
 
 ;; All The Icons
-(use-package all-the-icons)
-
+(use-package all-the-icons
+  :defer t)
 
 (use-package doom-modeline
   :defer t

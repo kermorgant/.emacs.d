@@ -59,18 +59,23 @@
 ;;   :load-path "~/src/composer.el")
 
 (use-package phpactor
-  :load-path "~/src/phpactor.el")
-
-(use-package company-phpactor ; :ensure nil
+  :defer t
   ;; :load-path "~/src/phpactor.el"
   )
 
+(use-package company-phpactor ; :ensure nil
+  :defer t
+  ;; :load-path "~/src/company-phpactor.el"
+  )
+
 (use-package php-cs-fixer :ensure nil
+  :defer t
   :load-path "~/src/php-cs-fixer.el"
   :config (setq php-cs-fixer--enable nil))
 
 
 (use-package flycheck-phpstan
+  :defer t
   :after (php-mode flycheck)
   :config (setq phpstan-executable "~/bin/phpstan"))
 
@@ -139,7 +144,8 @@
          ;;company-capf
          )))
 
-(use-package geben)
+(use-package geben
+  :defer t)
 
 ;; (defun counsel-phpactor (&optional initial-input)
 ;;   "Call the \"locate\" shell command.

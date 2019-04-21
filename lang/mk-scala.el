@@ -2,11 +2,14 @@
 ;;; Commentary:
 
 ;;; Code:
-(use-package ensime)
+(use-package ensime
+  :defer t)
 
-(use-package sbt-mode)
+(use-package sbt-mode
+  :defer t)
 
-(use-package scala-mode)
+(use-package scala-mode
+  :defer t)
 
 (provide 'mk-scala)
 ;;; mk-scala ends here

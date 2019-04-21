@@ -67,6 +67,7 @@
 (require 'mk-keybindings)
 
 (use-package avy
+  :defer t
   :commands (avy-goto-word-1))
 
 (use-package ivy
@@ -77,24 +78,29 @@
         ivy-use-virtual-buffers t)
   (bind-key "C-c C-r" 'ivy-resume))
 
-(use-package hydra)
+(use-package hydra
+  :defer t)
 
 (use-package ivy-hydra
+  :defer t
   :after (ivy hydra))
 
 (define-key ivy-minibuffer-map (kbd "C-o") 'hydra-ivy/body)
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 
 (use-package prescient
+  :defer t
   :config (prescient-persist-mode t))
 (use-package ivy-prescient
   :config (ivy-prescient-mode t))
 
 (use-package ivy-xref
+  :defer t
   :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 ;; use ripgrep configured to avoid lines longer than arbitrary limit
 (use-package counsel
+  :defer t
   :config
   (setq counsel-grep-base-command "rg -i -M 240 --no-heading --line-number --color never '%s' %s"
         counsel-rg-base-command "rg -S -M 240 --no-heading --line-number --color never %s ."))
@@ -109,6 +115,7 @@
 (require 'mk-editing)
 
 (use-package eyebrowse                  ; Easy workspaces creation and switching
+  :defer t
   :config
   (setq eyebrowse-mode-line-separator " "
         eyebrowse-new-workspace t)
@@ -116,6 +123,7 @@
 
 ;; NeoTree
 (use-package neotree
+  :defer t
   :config
   (with-eval-after-load 'neotree (require 'evil-collection-neotree))
   :init

@@ -1,6 +1,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package projectile
+  :defer t
   :config
   (projectile-mode)
   (setq projectile-project-search-path '("~/src/" "~/workspace/")
@@ -8,10 +9,12 @@
         projectile-switch-project-action #'projectile-find-file-dwim
         projectile-enable-caching t))
 
-(use-package counsel-projectile)
+(use-package counsel-projectile
+  :defer t)
 
 (use-package perspective
-  :init (persp-mode))
+  :init (persp-mode)
+  )
 
 (use-package persp-projectile
   :after (perspective projectile)

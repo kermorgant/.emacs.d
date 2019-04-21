@@ -9,6 +9,7 @@
   (tide-hl-identifier-mode +1))
 
 (use-package typescript-mode
+  :defer t
   :config
   (setq typescript-indent-level 2)
   (add-hook 'typescript-mode #'subword-mode)
@@ -21,6 +22,7 @@
   )
 
 (use-package tide
+  :defer t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)

@@ -1,3 +1,4 @@
-(use-package feature-mode)
+(use-package feature-mode
+  :defer t)
 
 (provide 'mk-cucumber)

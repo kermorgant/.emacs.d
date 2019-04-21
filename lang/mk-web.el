@@ -1,6 +1,7 @@
 ;;; mk-web --- essentially web-mode
 
 (use-package web-mode
+  :defer t
   :mode (("\\.html\\'" . web-mode)
          ("\\.html\\.twig\\'" . web-mode)
          ("\\.vue\\'" . web-mode)
@@ -44,7 +45,8 @@
   :defer t
   :after company)
 
-(use-package restclient)
+(use-package restclient
+  :defer t)
 
 ;; inspired from https://github.com/jerryhsieh/Emacs-config/blob/master/custom/web.el
 (defun my/web-html-setup()
@@ -71,6 +73,7 @@
   )
 
 (use-package prettier-js
+  :defer t
   :hook ((js2-mode . prettier-js-mode)
          (typescript-mode . prettier-js-mode)
          (css-mode . prettier-js-mode)
@@ -101,6 +104,7 @@
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (use-package tide
+  :defer t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode))

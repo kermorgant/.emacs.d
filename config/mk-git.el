@@ -1,12 +1,15 @@
 (use-package magit
+  :defer t
   :init
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
   :config (setq magit-completing-read-function 'ivy-completing-read))
 
-(use-package magit-gitflow)
+(use-package magit-gitflow
+  :defer t)
 
 (use-package magit-todos
+  :defer t
   :after magit
   :init
   (setq magit-todos-require-colon nil)
@@ -20,12 +23,13 @@
   :init (setq evil-magit-want-horizontal-movement nil))
 
 (use-package diff-hl                 ; Show changes in fringe
-  :ensure t
+  :defer t
   :hook ((prog-mode          . diff-hl-mode)
          ;; (dired-mode         . diff-hl-dired-mode)
          (magit-post-refresh . diff-hl-magit-post-refresh)))
 
-(use-package git-timemachine)
+(use-package git-timemachine
+  :defer t)
 
 ;; invalidate projectile cache upon some git events
 ;; see https://emacs.stackexchange.com/questions/26266/projectile-and-magit-branch-checkout
