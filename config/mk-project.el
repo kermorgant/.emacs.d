@@ -18,5 +18,8 @@
   :init
   (require 'persp-projectile))
 
+(use-package rg
+  :defer t)
+
 (provide 'mk-project)
 ;;; mk-project ends here

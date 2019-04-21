@@ -72,6 +72,7 @@
 
    "s" '(:ignore t :which-key "Search")
    "se" 'evil-iedit-state/iedit-mode
+   "sf" '(rg-project :wk "rg-project")
    "sgp" '(counsel-git-grep :wk "git grep")
    "sp" '(projectile-ag :wk "projectile-ag")
    "ss" 'swiper
