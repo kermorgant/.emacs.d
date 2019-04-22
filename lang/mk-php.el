@@ -44,6 +44,8 @@
               (make-local-variable 'eldoc-documentation-function)
               (setq eldoc-documentation-function
                     'phpactor-hover)))
+  (add-hook 'phpactor-after-update-file-hook
+            (lambda () (save-buffer)))
   (add-hook 'php-mode-hook
             (sp-with-modes '(php-mode)
               ;;TODO  https://github.com/Fuco1/.emacs.d/commit/9f24b9ceb03b2ef2fbd40ac6c5f4bd39c0719f80
