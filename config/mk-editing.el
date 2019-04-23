@@ -1,6 +1,6 @@
 (global-subword-mode 1)
 (winner-mode 1)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package which-key
   :defer t)
@@ -26,17 +26,19 @@
   :commands er/expand-region)
 
 (use-package wakatime-mode
-  :defer t
-  :init (global-wakatime-mode))
+  :defer 3
+  :init
+  (if (file-exists-p "~/.wakatime.cfg")
+      (global-wakatime-mode)))
 
 (use-package ace-window
   :defer t
   :init
   (setq aw-scope 'frame
-        aw-ignore-on t
-        aw-dispatch-when-more-than 3
-        aw-keys '(?h ?j ?k ?l ?u ?i ?o ?p)
-        aw-ignored-buffers '("*NeoTree*")))
+	aw-ignore-on t
+	aw-dispatch-when-more-than 3
+	aw-keys '(?h ?j ?k ?l ?u ?i ?o ?p)
+	aw-ignored-buffers '("*NeoTree*")))
 
 (use-package smartparens
   :defer t
@@ -54,15 +56,22 @@
   :defer t
   :general
   (:keymaps 'symbol-overlay-mode-map
-            "r" 'symbol-overlay-rename))
+	    "r" 'symbol-overlay-rename))
 
 (use-package dist-file-mode
+  :defer t)
+
+(use-package json-mode
   :defer t)
 
 (use-package smart-jump
   :defer t
   :config
   (smart-jump-setup-default-registers))
+
+(recentf-mode 1)
+(setq recentf-max-menu-items 25
+      recentf-max-saved-items 25)
 
 (provide 'mk-editing)
 ;;; mk-editing ends here

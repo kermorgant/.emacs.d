@@ -3,12 +3,12 @@
   (interactive)
   (save-excursion
     (if (region-active-p)
-        (progn
-          (indent-region (region-beginning) (region-end))
-          (message "Indented selected region."))
+	(progn
+	  (indent-region (region-beginning) (region-end))
+	  (message "Indented selected region."))
       (progn
-        (evil-indent (point-min) (point-max))
-        (message "Indented buffer.")))
+	(evil-indent (point-min) (point-max))
+	(message "Indented buffer.")))
     (whitespace-cleanup)))
 
 (defun mk/indent-new-comment-line ()

@@ -61,6 +61,7 @@
    ;; Projects
    "p" '(:ignore t :which-key "Projects")
    "pb" '(counsel-projectile-switch-to-buffer :which-key "buffers")
+   "pe" 'projectile-recentf
    "pf" 'projectile-find-file
    "pp" 'projectile-persp-switch-project
    "pl" 'persp-window-switch
@@ -133,6 +134,14 @@
 (global-set-key (kbd "M-l") 'next-buffer)
 (global-set-key (kbd "M-v") 'er/contract-region)
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
+
+;; mac keys behaviour
+(when (eq system-type 'darwin)
+  (setq ns-use-native-fullscreen t)
+  (global-set-key [kp-delete] 'delete-char)
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta)
+  (setq mac-right-option-modifier 'none))
 
 (provide 'mk-keybindings)
 ;;; mk-keybindings ends here

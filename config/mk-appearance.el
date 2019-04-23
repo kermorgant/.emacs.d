@@ -1,13 +1,15 @@
 (when (member "Source Code Pro" (font-family-list)) (set-frame-font "Source Code Pro" t t))
 
-(scroll-bar-mode -1)
+;(scroll-bar-mode -1)
 (tool-bar-mode   -1)
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 (show-paren-mode 1)
 (save-place-mode t)
+(toggle-scroll-bar -1)
 
 (when window-system
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
   (global-hl-line-mode))
 
 (setq mouse-wheel-follow-mouse 't)

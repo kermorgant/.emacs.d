@@ -1,9 +1,15 @@
+(defun my-truncate-lines ()
+  (setq truncate-lines nil))
+
 (use-package magit
   :defer t
   :init
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
-  :config (setq magit-completing-read-function 'ivy-completing-read))
+  (add-hook 'magit-revision-mode-hook 'my-truncate-lines)
+  :config
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (setq-default magit-diff-refine-hunk 'all))
 
 (use-package magit-gitflow
   :defer t)

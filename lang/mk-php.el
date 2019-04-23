@@ -17,7 +17,7 @@
             "ci" '(phpactor-inflect-class :wk "class inflect")
             "cr" '(phpactor-move-class :wk "class rename")
             "ec" '(phpactor-extract-constant :wk "extract constant")
-            "f" '(phpactor-fix-namespace :wk "fix namespace")
+            "f"  '(phpactor-fix-namespace :wk "fix namespace")
             "ga" '(phpactor-generate-accessors :wk "generate accessor")
             "gc" '(phpactor-complete-constructor :wk "constructor complete")
             "gm" '(phpactor-generate-method :wk "generate method"))

@@ -1,5 +1,18 @@
 ;;; mk-web --- essentially web-mode
 
+
+(add-to-list 'auto-mode-alist '("\\.sql.tmpl\\'" . sql-mode))
+(add-to-list 'auto-mode-alist '("\\.pgsqlin\\'" . sql-mode))
+(add-to-list 'auto-mode-alist '("\\.pgsql\\'" . sql-mode))
+(add-to-list 'auto-mode-alist '("\\.html.tmpl\\'" . web-mode))
+(add-to-list 'auto-mode-alist
+             '("\\.json.tmpl\\'" . (lambda ()
+                                     (json-mode)
+                                     (setq flycheck-disabled-checkers  (append '(json-python-json) flycheck-disabled-checkers))
+                               )))
+(add-hook 'sql-mode-load-hook
+  (function (lambda () (sql-highlight-postgres-keywords))))
+
 (use-package web-mode
   :defer t
   :mode (("\\.html\\'" . web-mode)
