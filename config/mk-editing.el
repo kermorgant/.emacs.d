@@ -41,7 +41,7 @@
 	aw-ignored-buffers '("*NeoTree*")))
 
 (use-package smartparens
-  :defer t
+  :defer 1
   :diminish smartparens-mode
   :config
   (progn

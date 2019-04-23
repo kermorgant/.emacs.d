@@ -13,8 +13,7 @@
   :defer t)
 
 (use-package perspective
-  :init (persp-mode)
-  )
+  :init (persp-mode))
 
 (use-package persp-projectile
   :after (perspective projectile)

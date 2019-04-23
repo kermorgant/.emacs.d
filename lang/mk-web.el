@@ -1,10 +1,8 @@
 ;;; mk-web --- essentially web-mode
 
-
 (add-to-list 'auto-mode-alist '("\\.sql.tmpl\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsqlin\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsql\\'" . sql-mode))
-(add-to-list 'auto-mode-alist '("\\.html.tmpl\\'" . web-mode))
 (add-to-list 'auto-mode-alist
              '("\\.json.tmpl\\'" . (lambda ()
                                      (json-mode)
@@ -14,9 +12,11 @@
   (function (lambda () (sql-highlight-postgres-keywords))))
 
 (use-package web-mode
+  :after (company-web prettier-js tide)
   :defer t
   :mode (("\\.html\\'" . web-mode)
          ("\\.html\\.twig\\'" . web-mode)
+	 ("\\.html.tmpl\\'" . web-mode)
          ("\\.vue\\'" . web-mode)
          ("\\.tsx\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
