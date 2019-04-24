@@ -141,7 +141,12 @@
   (global-set-key [kp-delete] 'delete-char)
   (setq mac-option-modifier 'super)
   (setq mac-command-modifier 'meta)
-  (setq mac-right-option-modifier 'none))
+  (setq mac-right-option-modifier 'none)
+  ;; temp hack while using finnish layout
+  (global-set-key "\M-(" (lambda () (interactive) (insert "{")))
+  (global-set-key "\M-)" (lambda () (interactive) (insert "}")))
+  (global-set-key "\M-8" (lambda () (interactive) (insert "[")))
+  (global-set-key "\M-9" (lambda () (interactive) (insert "]"))))
 
 (provide 'mk-keybindings)
 ;;; mk-keybindings ends here

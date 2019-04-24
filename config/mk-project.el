@@ -23,5 +23,17 @@
 (use-package rg
   :defer t)
 
+(use-package org-projectile
+  :defer t
+  :after (projectile)
+  :bind (("C-c n p" . org-projectile-project-todo-completing-read)
+         ("C-c c" . org-capture))
+  :config
+  (progn
+    (org-projectile-per-project)
+    (setq org-projectile-projects-file "todo.org")
+    ;; (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+    (push (org-projectile-project-todo-entry) org-capture-templates)))
+
 (provide 'mk-project)
 ;;; mk-project ends here
