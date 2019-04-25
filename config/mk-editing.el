@@ -73,5 +73,10 @@
 (setq recentf-max-menu-items 25
       recentf-max-saved-items 25)
 
+
+(use-package beacon
+  :defer 1
+  :init (beacon-mode 1)
+  )
 (provide 'mk-editing)
 ;;; mk-editing ends here
