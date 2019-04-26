@@ -76,7 +76,12 @@
 
 (use-package beacon
   :defer 1
-  :init (beacon-mode 1)
-  )
+  :init (beacon-mode 1))
+
+;; Whitespace butler - clean up whitespace
+(use-package ws-butler
+  :config
+  (ws-butler-global-mode t))
+
 (provide 'mk-editing)
 ;;; mk-editing ends here

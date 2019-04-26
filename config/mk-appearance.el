@@ -7,6 +7,8 @@
 (show-paren-mode 1)
 (save-place-mode t)
 (toggle-scroll-bar -1)
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
 
 (when window-system
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
