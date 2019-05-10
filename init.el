@@ -157,8 +157,9 @@
 ;; auto completion
 (require 'mk-complete)
 
-;; php
 (require 'mk-php)
+
+(require 'mk-python)
 
 ;; vue
 (require 'mk-vue)
@@ -169,19 +170,15 @@
 ;; web
 (require 'mk-web)
 
-;; react
 (require 'mk-react)
 
-;; yaml
 (require 'mk-yaml)
 
-;; docker
 (require 'mk-docker)
 
 ;; behat
 (require 'mk-cucumber)
 
-;; scala
 (require 'mk-scala)
 
 ;; tools
