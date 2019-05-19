@@ -6,8 +6,8 @@
   (set (make-local-variable 'company-backends) '(company-phpactor company-files)))
 
 (use-package php-mode
-  ;; :defer 1
-  ;; :after (php-cs-fixer)
+  :defer 1
+  :after (php-cs-fixer smart-jump smartparens)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          ;; (php-mode . mk/smartjump-php)
@@ -58,7 +58,9 @@
               ;;TODO  https://github.com/Fuco1/.emacs.d/commit/9f24b9ceb03b2ef2fbd40ac6c5f4bd39c0719f80
               ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
               (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
-              (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET"))))
+              ;; (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET")))
+              (sp-local-pair "/**" "*/" :post-handlers '(:add (" [i]* ||\n[i]" "RET")))
+              )
 
             ;; TODO compare with https://github.com/Fuco1/.emacs.d/commit/a4c83a10a959e3ce1d572cc48429d41632b5768e
             (require 'flycheck-phpstan)
@@ -78,6 +80,7 @@
 
 (use-package php-cs-fixer :ensure nil
   :defer t
+  :commands php-cs-fixer--fix
   :load-path "~/src/php-cs-fixer.el"
   :config (setq php-cs-fixer--enable nil))
 

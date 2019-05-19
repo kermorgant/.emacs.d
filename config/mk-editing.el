@@ -41,7 +41,7 @@
 	aw-ignored-buffers '("*NeoTree*")))
 
 (use-package smartparens
-  :defer 1
+  ;; :defer 1
   :diminish smartparens-mode
   :config
   (progn
@@ -66,6 +66,7 @@
 
 (use-package smart-jump
   :defer t
+  :commands smart-jump-register
   :config
   (smart-jump-setup-default-registers))
 
