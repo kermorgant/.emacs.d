@@ -1,9 +1,16 @@
+
+(defun mk/company-php ()
+  "Add backends for php completion in company mode."
+  (require 'company)
+  (require 'company-phpactor)
+  (set (make-local-variable 'company-backends) '(company-phpactor company-files)))
+
 (use-package php-mode
-  :defer t
-  :after (php-cs-fixer)
+  ;; :defer 1
+  ;; :after (php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
-         (php-mode . mk/smartjump-php)
+         ;; (php-mode . mk/smartjump-php)
          (php-mode . php-enable-symfony2-coding-style))
   :init
   (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
@@ -55,26 +62,24 @@
 
             ;; TODO compare with https://github.com/Fuco1/.emacs.d/commit/a4c83a10a959e3ce1d572cc48429d41632b5768e
             (require 'flycheck-phpstan)
-            (flycheck-mode t)))
+            (flycheck-mode t))
+  )
 
 ;; (use-package composer :ensure nil
 ;;   :load-path "~/src/composer.el")
 
 (use-package phpactor
-  :defer t
-  ;; :load-path "~/src/phpactor.el"
+  :load-path "~/src/phpactor.el"
   )
 
 (use-package company-phpactor ; :ensure nil
-  :defer t
-  ;; :load-path "~/src/company-phpactor.el"
+  :load-path "~/src/phpactor.el"
   )
 
 (use-package php-cs-fixer :ensure nil
   :defer t
   :load-path "~/src/php-cs-fixer.el"
   :config (setq php-cs-fixer--enable nil))
-
 
 (use-package flycheck-phpstan
   :defer t
@@ -129,22 +134,6 @@
 ;;                                           "-vvv"
 ;;                                           ))
 ;;   (setq lsp-php-workspace-root-detectors '(lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robots.txt")))
-
-(defun mk/company-php ()
-  "Add backends for php completion in company mode."
-  (interactive)
-  (require 'company)
-  (require 'company-phpactor)
-  (set (make-local-variable 'company-backends)
-       '(;; list of backends
-         ;; company-lsp
-         company-phpactor
-         company-files
-         ;; company-keywords       ; keywords
-         ;;company-dabbrev-code   ; code words
-         ;; company-lsp            ; lsp completion
-         ;;company-capf
-         )))
 
 (use-package geben
   :defer t)

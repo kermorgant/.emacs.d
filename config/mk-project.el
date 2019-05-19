@@ -56,5 +56,26 @@
   (org-projectile-capture-for-current-project
    :capture-template "put your capture template here"))
 
+
+(use-package eyebrowse                  ; Easy workspaces creation and switching
+  :ensure nil
+  :defer t
+  :config
+  (setq eyebrowse-mode-line-separator " "
+        eyebrowse-new-workspace t)
+  (eyebrowse-mode t))
+
+;; NeoTree
+(use-package neotree
+  :defer t
+  :config
+  (with-eval-after-load 'neotree (require 'evil-collection-neotree))
+  :init
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
+
 (provide 'mk-project)
 ;;; mk-project ends here

@@ -18,7 +18,7 @@
   (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
 
 (use-package evil-collection
-  :defer 1
+  ;; :defer 1
   :after evil
   :config (evil-collection-init))
 

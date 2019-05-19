@@ -112,33 +112,14 @@
   (setq counsel-grep-base-command "rg -i -M 240 --no-heading --line-number --color never '%s' %s"
         counsel-rg-base-command "rg -S -M 240 --no-heading --line-number --color never %s ."))
 
-;; projectile and persp-mode configuration
-(require 'mk-project)
-
 ;; evil configuration
 (require 'mk-evil)
 
+;; projectile and persp-mode configuration
+(require 'mk-project)
+
 ;; editing configuration
 (require 'mk-editing)
-
-(use-package eyebrowse                  ; Easy workspaces creation and switching
-  :defer t
-  :config
-  (setq eyebrowse-mode-line-separator " "
-        eyebrowse-new-workspace t)
-  (eyebrowse-mode t))
-
-;; NeoTree
-(use-package neotree
-  :defer t
-  :config
-  (with-eval-after-load 'neotree (require 'evil-collection-neotree))
-  :init
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -165,12 +146,12 @@
 (require 'mk-vue)
 
 ;; lsp
-(require 'mk-lsp)
+;(require 'mk-lsp)
 
 ;; web
 (require 'mk-web)
 
-(require 'mk-react)
+;(require 'mk-react)
 
 (require 'mk-yaml)
 
@@ -179,7 +160,7 @@
 ;; behat
 (require 'mk-cucumber)
 
-(require 'mk-scala)
+;(require 'mk-scala)
 
 ;; tools
 (require 'mk-tools)
