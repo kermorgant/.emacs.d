@@ -1,16 +1,40 @@
-
 (defun mk/company-php ()
   "Add backends for php completion in company mode."
   (require 'company)
   (require 'company-phpactor)
   (set (make-local-variable 'company-backends) '(company-phpactor company-files)))
 
+(defun mk/php-smartparens ()
+  "Smartparens settings for PHP."
+  (sp-with-modes '(php-mode)
+    ;;TODO  https://github.com/Fuco1/.emacs.d/commit/9f24b9ceb03b2ef2fbd40ac6c5f4bd39c0719f80
+    ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
+    (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
+    ;; (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET")))
+    (sp-local-pair "/**" "*/" :post-handlers '(:add (" [i]* ||\n[i]" "RET")))
+    ))
+
+(defun mk/phpactor ()
+  "Phpactor tweaks."
+  (make-local-variable 'eldoc-documentation-function)
+  (setq eldoc-documentation-function 'phpactor-hover)
+  (add-hook 'phpactor-after-update-file-hook
+            (lambda () (save-buffer))))
+
+(defun mk/cs-fix-on-save ()
+  "Run php-cs-fixer when saving a php buffer."
+(add-hook 'php-mode-hook
+            (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local))))
+
 (use-package php-mode
   :defer 1
-  :after (php-cs-fixer smart-jump smartparens)
+  :after ( smart-jump smartparens php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
-         ;; (php-mode . mk/smartjump-php)
+         (php-mode . mk/php-smartparens)
+         (php-mode . mk/phpactor)
+         (php-mode . mk/cs-fix-on-save)
+         (php-mode . mk/smartjump-php)
          (php-mode . php-enable-symfony2-coding-style))
   :init
   (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
@@ -19,7 +43,7 @@
   :general
   (:keymaps 'php-mode-map :states 'normal :prefix ","
             "m" '(phpactor-context-menu :wk "context menu")
-            ;; "cc" '(phpactor-copy-class :wk "class copy")
+            "cc" '(phpactor-copy-class :wk "class copy")
             "cn" '(phpactor-create-new-class :wk "class new")
             "ci" '(phpactor-inflect-class :wk "class inflect")
             "cr" '(phpactor-move-class :wk "class rename")
@@ -29,7 +53,6 @@
             "gc" '(phpactor-complete-constructor :wk "constructor complete")
             "gm" '(phpactor-generate-method :wk "generate method"))
   (:keymaps 'php-mode-map :states '(insert normal)
-            "M-/" 'company-phpactor
             "M-." 'smart-jump-go)
   (:keymaps 'php-mode-map :states 'normal :prefix "SPC d"
             "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
@@ -43,25 +66,9 @@
             "u" '(geben-step-out :wk "step out")
             "v" '(geben-display-context :wk "context")
             "w" '(geben-display-window-function :wk "window"))
+
   :config
   (add-hook 'php-mode-hook
-            (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local)))
-  (add-hook 'php-mode-hook
-            (lambda ()
-              (make-local-variable 'eldoc-documentation-function)
-              (setq eldoc-documentation-function
-                    'phpactor-hover)))
-  (add-hook 'phpactor-after-update-file-hook
-            (lambda () (save-buffer)))
-  (add-hook 'php-mode-hook
-            (sp-with-modes '(php-mode)
-              ;;TODO  https://github.com/Fuco1/.emacs.d/commit/9f24b9ceb03b2ef2fbd40ac6c5f4bd39c0719f80
-              ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
-              (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
-              ;; (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET")))
-              (sp-local-pair "/**" "*/" :post-handlers '(:add (" [i]* ||\n[i]" "RET")))
-              )
-
             ;; TODO compare with https://github.com/Fuco1/.emacs.d/commit/a4c83a10a959e3ce1d572cc48429d41632b5768e
             (require 'flycheck-phpstan)
             (flycheck-mode t))
@@ -78,7 +85,7 @@
   :load-path "~/src/phpactor.el"
   )
 
-(use-package php-cs-fixer :ensure nil
+(use-package php-cs-fixer
   :defer t
   :commands php-cs-fixer--fix
   :load-path "~/src/php-cs-fixer.el"

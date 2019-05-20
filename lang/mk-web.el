@@ -1,5 +1,6 @@
 ;;; mk-web --- essentially web-mode
 
+(add-to-list 'auto-mode-alist '("\\.html.tmpl\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.sql.tmpl\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsqlin\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsql\\'" . sql-mode))
@@ -7,16 +8,16 @@
              '("\\.json.tmpl\\'" . (lambda ()
                                      (json-mode)
                                      (setq flycheck-disabled-checkers  (append '(json-python-json) flycheck-disabled-checkers))
-                               )))
+                                     )))
 (add-hook 'sql-mode-load-hook
-  (function (lambda () (sql-highlight-postgres-keywords))))
+          (function (lambda () (sql-highlight-postgres-keywords))))
 
 (use-package web-mode
   :after (company-web prettier-js tide)
-  :defer t
+  ;; :defer 1
   :mode (("\\.html\\'" . web-mode)
          ("\\.html\\.twig\\'" . web-mode)
-	 ("\\.html.tmpl\\'" . web-mode)
+         ("\\.html.tmpl\\'" . web-mode)
          ("\\.vue\\'" . web-mode)
          ("\\.tsx\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
@@ -29,9 +30,17 @@
         web-mode-comment-style 2 ;server comments
         web-mode-enable-auto-pairing nil
         web-mode-enable-current-element-highlight t
-        web-mode-enable-current-column-highlight t)
+        web-mode-enable-current-column-highlight t
+        web-mode-engines-alist '(("asp"    . "\\.html.tmpl\\'")))
+  (add-hook 'web-mode-hook (lambda()
+                             (cond ((equal web-mode-content-type "html")
+                                    (my/web-html-setup))
+                                   ((member web-mode-content-type '("vue"))
+                                    (my/web-vue-setup))
+                                   )))
   :init
   (add-to-list 'company-backends 'company-web-html)
+  (web-mode-use-tabs)
   (add-hook 'web-mode-hook
             (general-define-key
              :states '(normal visual)
@@ -45,13 +54,6 @@
              "mz" '(web-mode-fold-or-unfold :wk "element-fold")
              ))
   (electric-indent-mode +1)
-:config
-  (add-hook 'web-mode-hook (lambda()
-                             (cond ((equal web-mode-content-type "html")
-                                    (my/web-html-setup))
-                                   ((member web-mode-content-type '("vue"))
-                                    (my/web-vue-setup))
-                                   )))
   )
 
 (use-package company-web
@@ -65,11 +67,11 @@
 (defun my/web-html-setup()
   "Setup for web-mode html files."
   (message "web-mode use html related setup")
-  ;(flycheck-add-mode 'html-tidy 'web-mode)
-  ;(flycheck-select-checker 'html-tidy)
+                                        ;(flycheck-add-mode 'html-tidy 'web-mode)
+                                        ;(flycheck-select-checker 'html-tidy)
   (add-to-list (make-local-variable 'company-backends)
                '(company-web-html company-files company-css company-capf company-dabbrev))
-;  (add-hook 'before-save-hook #'sgml-pretty-print)
+                                        ;  (add-hook 'before-save-hook #'sgml-pretty-print)
 
   )
 

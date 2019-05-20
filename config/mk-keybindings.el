@@ -1,5 +1,8 @@
+(use-package ag
+  :defer 1)
+
 (use-package which-key
-  :defer 10
+  ;; :defer 10
   :config (which-key-mode t))
 
 (use-package general
@@ -12,10 +15,19 @@
 
   (general-define-key
    :states '(normal visual emacs)
-   "*"   'symbol-overlay-put)
+   "*"   'symbol-overlay-put
+   "TAB" 'evil-indent)
+  
+  (general-define-key
+   :keymaps '(compilation-mode-map ag-mode-map)
+   "M-p"   'ace-window)
 
   (general-define-key
-   :states '(normal visual insert emacs)
+   :keymaps '(magit-status-mode-map)
+   "q"   'winner-undo)
+
+  (general-define-key
+   :states '(normal visual insert emacs motion)
    :keymaps 'override
    :prefix "SPC"
    :non-normal-prefix "C-SPC"
@@ -25,7 +37,7 @@
    "'"   '(iterm-focus :which-key "iterm")
    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
    "/"   'counsel-git-grep
-   "TAB" '(switch-to-other-buffer :which-key "prev buffer")
+   ;; "TAB" '(switch-to-other-buffer :which-key "prev buffer")
    "SPC" '(counsel-M-x  :which-key "M-x")
 
 
@@ -47,6 +59,7 @@
 
    ;; GIT
    "g"  '(:ignore t :which-key "Git")
+   "gb" '(magit-blame :wk "blame")
    "gs" '(magit-status :wk "status")
    "gt" '(git-timemachine :wk "time machine")
 
@@ -126,6 +139,8 @@
 
 ;; ace-window-switching keybinding
 (bind-key* "M-p" 'ace-window)
+(global-set-key (kbd "M-p") 'ace-window)
+
 (progn (setq aw-scope 'frame))
 
 ;; move easily to previous or next buffer

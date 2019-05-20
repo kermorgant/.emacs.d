@@ -1,4 +1,4 @@
-(when (member "Source Code Pro" (font-family-list)) (set-frame-font "Source Code Pro" t t))
+(when (member "Source Code Pro" (font-family-list)) (set-frame-font "Source Code Pro-13" t t))
 
 ;(scroll-bar-mode -1)
 (tool-bar-mode   -1)
@@ -8,7 +8,7 @@
 (save-place-mode t)
 (toggle-scroll-bar -1)
 (setq split-height-threshold nil)
-(setq split-width-threshold 0)
+(setq split-width-threshold 120)
 
 (when window-system
 (add-to-list 'default-frame-alist '(fullscreen . maximized))

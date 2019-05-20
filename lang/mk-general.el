@@ -7,5 +7,7 @@
 (use-package smart-jump
   :defer 1)
 
+(add-to-list 'auto-mode-alist '("\\(/\\|\\`\\)bconf.txt" . conf-mode))
+
 (provide 'mk-general)
 ;;; mk-general ends here

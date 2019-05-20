@@ -66,7 +66,7 @@
 
 (use-package smart-jump
   :defer t
-  :commands smart-jump-register
+  :commands (smart-jump-register smart-jump-go)
   :config
   (smart-jump-setup-default-registers))
 
@@ -74,6 +74,9 @@
 (setq recentf-max-menu-items 25
       recentf-max-saved-items 25)
 
+;; (set-clipboard-coding-system 'utf-8)
+;; (set-selection-coding-system 'utf-8)
+;; (prefer-coding-system 'iso-latin-1-unix)
 
 (use-package beacon
   :defer 1

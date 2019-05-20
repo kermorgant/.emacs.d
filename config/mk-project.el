@@ -21,7 +21,10 @@
   (require 'persp-projectile))
 
 (use-package rg
-  :defer t)
+  :defer t
+  :init
+  (setq rg-custom-type-aliases
+        '(("tmpl" .    "*.html.tmpl *.txt.tmpl") )))
 
 (defvar mk:created-property-string "
   :PROPERTIES:
