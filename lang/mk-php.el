@@ -23,12 +23,12 @@
 
 (defun mk/cs-fix-on-save ()
   "Run php-cs-fixer when saving a php buffer."
-(add-hook 'php-mode-hook
+  (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local))))
 
 (use-package php-mode
   :defer 1
-  :after ( smart-jump smartparens php-cs-fixer)
+  :after (smart-jump smartparens php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/php-smartparens)
@@ -86,7 +86,7 @@
   )
 
 (use-package php-cs-fixer
-  :defer t
+  :defer 1
   :commands php-cs-fixer--fix
   :load-path "~/src/php-cs-fixer.el"
   :config (setq php-cs-fixer--enable nil))
