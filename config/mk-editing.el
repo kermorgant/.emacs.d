@@ -25,11 +25,10 @@
   :defer t
   :commands er/expand-region)
 
-(use-package wakatime-mode
-  :defer 3
-  :init
-  (if (file-exists-p "~/.wakatime.cfg")
-      (global-wakatime-mode)))
+(when (file-exists-p "~/.wakatime.cfg")
+  (use-package wakatime-mode
+    :defer 3
+    :init (global-wakatime-mode)))
 
 (use-package ace-window
   :defer t

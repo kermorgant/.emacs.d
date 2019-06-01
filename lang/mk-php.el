@@ -86,7 +86,6 @@
   )
 
 (use-package php-cs-fixer
-  :defer 1
   :commands php-cs-fixer--fix
   :load-path "~/src/php-cs-fixer.el"
   :config (setq php-cs-fixer--enable nil))
