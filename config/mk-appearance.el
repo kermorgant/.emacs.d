@@ -11,7 +11,7 @@
 (setq split-width-threshold 120)
 
 (when window-system
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (global-hl-line-mode))
 
 (setq mouse-wheel-follow-mouse 't)

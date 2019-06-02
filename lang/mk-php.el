@@ -36,10 +36,11 @@
          (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
          (php-mode . php-enable-symfony2-coding-style))
+  :custom
+  (flycheck-phpcs-standard "PSR2")
+  (geben-pause-at-entry-line nil)
   :init
   (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
-  (setq flycheck-phpcs-standard "PSR2"
-        geben-pause-at-entry-line nil)
   :general
   (:keymaps 'php-mode-map :states 'normal :prefix ","
             "m" '(phpactor-context-menu :wk "context menu")

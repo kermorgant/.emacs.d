@@ -55,7 +55,7 @@
   :defer t
   :general
   (:keymaps 'symbol-overlay-mode-map
-	    "r" 'symbol-overlay-rename))
+            "r" 'symbol-overlay-rename))
 
 (use-package dist-file-mode
   :defer t)

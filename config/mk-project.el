@@ -4,10 +4,11 @@
   :defer t
   :config
   (projectile-mode)
-  (setq projectile-project-search-path '("~/src/" "~/workspace/")
-        projectile-completion-system 'ivy
-        projectile-switch-project-action #'projectile-find-file-dwim
-        projectile-enable-caching t))
+  :custom
+  (projectile-project-search-path '("~/src/" "~/workspace/"))
+  (projectile-completion-system 'ivy)
+  (projectile-switch-project-action #'projectile-find-file-dwim)
+  (projectile-enable-caching t))
 
 (use-package counsel-projectile
   :defer t)
@@ -22,8 +23,9 @@
 
 (use-package rg
   :defer t
-  :init
-  (setq rg-custom-type-aliases
+  :ensure-system-package rg
+  :custom
+  (rg-custom-type-aliases
         '(("tmpl" .    "*.html.tmpl *.txt.tmpl") )))
 
 (defvar mk:created-property-string "
@@ -58,7 +60,6 @@
   (interactive)
   (org-projectile-capture-for-current-project
    :capture-template "put your capture template here"))
-
 
 (use-package eyebrowse                  ; Easy workspaces creation and switching
   :ensure nil

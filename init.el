@@ -35,9 +35,18 @@
 (unless (package-installed-p 'use-package) ; unless it is already installed
   (package-refresh-contents) ; updage packages archive
   (package-install 'use-package)) ; and install the most recent version of use-package
-(require 'use-package)
+
+(eval-when-compile
+  (require 'use-package))
+
+(use-package diminish)
+(require 'diminish)                ;; if you use :diminish
+(require 'bind-key)                ;; if you use any :bind variant
+
 (use-package auto-compile
   :config (auto-compile-on-load-mode))
+(use-package use-package-ensure-system-package)
+
 (setq load-prefer-newer t)
 
 ;; configurations
@@ -164,6 +173,10 @@
 
 ;; tools
 (require 'mk-tools)
+
+;; local customizations
+(if (not (require 'mk-localhost nil t))
+    (message "no local customizations found")
 
 (add-hook 'after-init-hook (lambda () (setq gc-cons-threshold (* 1 1024 1024))))
 ;;; init ends here
