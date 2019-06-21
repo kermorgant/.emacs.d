@@ -1,5 +1,7 @@
-(use-package ag
-  :defer 1)
+(use-package transient
+  :defer 1
+  :init
+  (transient-bind-q-to-quit))
 
 (use-package which-key
   ;; :defer 10
@@ -72,13 +74,14 @@
    "lp" 'persp-prev
 
    ;; Projects
-   "p" '(:ignore t :which-key "Projects")
-   "pb" '(counsel-projectile-switch-to-buffer :which-key "buffers")
-   "pe" 'projectile-recentf
-   "pf" 'projectile-find-file
-   "pp" 'projectile-persp-switch-project
-   "pl" 'persp-window-switch
-   "pt" 'neotree-toggle
+   "p" '(mk-projectile :wk "project")
+   ;; "p" '(:ignore t :which-key "Projects")
+   ;; "pb" '(counsel-projectile-switch-to-buffer :which-key "buffers")
+   ;; "pe" 'projectile-recentf
+   ;; "pf" 'projectile-find-file
+   ;; "pp" 'projectile-persp-switch-project
+   ;; "pl" 'persp-window-switch
+   ;; "pt" 'neotree-toggle
 
    "nf" '(narrow-to-defun :wk "narrow to function")
    "nr" '(narrow-to-region :wk "narrow to region")

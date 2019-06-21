@@ -26,7 +26,10 @@
   :ensure-system-package rg
   :custom
   (rg-custom-type-aliases
-        '(("tmpl" .    "*.html.tmpl *.txt.tmpl") )))
+   '(("tmpl" .    "*.html.tmpl *.txt.tmpl") )))
+
+(use-package ag
+  :defer 1)
 
 (defvar mk:created-property-string "
   :PROPERTIES:
@@ -80,6 +83,54 @@
   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
+
+(define-transient-command matcha-projectile-cache ()
+  "Cache"
+  [["Cache"
+    ("c" "Invalidate" projectile-invalidate-cache)
+    ("d" "Remove Known Project" projectile-remove-known-project)
+    ("k" "Cache Current File" projectile-cache-current-file)
+    ("s" "Cleanup Known Projects" projectile-cleanup-known-projects)]])
+
+(define-transient-command mk-projectile ()
+  "Projectile"
+  [["Find"
+    ("f" "File" projectile-find-file)
+    ("F" "File Other Window" projectile-find-file-other-window)
+    ("l" "File DWIM" projectile-find-file-dwim)
+    ("L" "File DWIM Other Window" projectile-find-file-dwim-other-window)
+    ("o" "Other File" projectile-find-other-file)
+    ("O" "Other file Other Window" projectile-find-other-file-other-window)
+    ("r" "Recent File" projectile-recentf)
+    ("u" "Test File" projectile-find-test-file)]
+   ["Search"
+    ("a" "AG" projectile-ag)
+    ("r" "AG" rg-project)
+    ("A" "Grep" projectile-grep)
+    ("s" "Multi Occur" projectile-multi-occur)
+    ("t" "Find Tag" projectile-find-tag)
+    ("T" "Regenerate Tags" projectile-regenerate-tags)]
+
+   ["Actions"
+    ("R" "Replace Regexp" projectile-replace-regexp)
+    ("S" "Replace" projectile-replace)
+    ;; ("U" "Run Tests" projectile-test-project)
+    ;; ("m" "Compile Project" projectile-compile-project)
+    ("c" "Run Async Shell Command" projectile-run-async-shell-command-in-root)
+    ("C" "Run Command" projectile-run-command-in-root)]]
+  [["Buffers & Directories"
+    ("b" "Buffer" counsel-projectile-switch-to-buffer)
+    ("B" "Buffer Other Window" projectile-switch-to-buffer-other-window)
+    ("d" "Directory" projectile-find-dir)
+    ("D" "Directory Other Window" projectile-find-dir-other-window)]
+   ["Manage"
+    ("p" "Switch Project" projectile-persp-switch-project)
+    ("I" "Project Info" projectile-project-info)
+    ("K" "Kill Project Buffers" projectile-kill-buffers)
+    ("k" "Cache..." matcha-projectile-cache)]
+   ["Modes"
+    ("h" "Dired" projectile-dired)
+    ("i" "IBuffer" projectile-ibuffer)]])
 
 (provide 'mk-project)
 ;;; mk-project ends here

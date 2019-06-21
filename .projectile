@@ -1,8 +1,9 @@
--/geben
--/backups
 -/.cache
--/elpa
 -/auto-save-list
+-/backups
+-/elpa
+-/geben
+-/places
 -/projectile*
 -/recentf
--/places
+-/transient
