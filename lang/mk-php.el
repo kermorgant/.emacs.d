@@ -7,10 +7,8 @@
 (defun mk/php-smartparens ()
   "Smartparens settings for PHP."
   (sp-with-modes '(php-mode)
-    ;;TODO  https://github.com/Fuco1/.emacs.d/commit/9f24b9ceb03b2ef2fbd40ac6c5f4bd39c0719f80
     ;; https://github.com/Fuco1/smartparens/wiki/Permissions#insertion-specification
     (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
-    ;; (sp-local-pair "/**" "*/" :post-handlers '(:add ("||\n [i]" "RET")))
     (sp-local-pair "/**" "*/" :post-handlers '(:add (" [i]* ||\n[i]" "RET")))
     ))
 
@@ -26,8 +24,12 @@
   (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local))))
 
-(with-eval-after-load "transient"
-  (define-transient-command php-transient-menu ()
+(eval-when-compile (require 'transient))
+
+(defun mk/php-menu ()
+  "Defines transient menu for PHP."
+  (defvar mk-php-menu)
+  (define-transient-command mk-php-menu ()
     "Php"
     [["Class"
       ("cc" "Copy" phpactor-copy-class)
@@ -55,23 +57,24 @@
   )
 
 (use-package php-mode
-  :defer 1
-  :after (smart-jump smartparens php-cs-fixer)
+  :defer t
+  :after (smart-jump smartparens transient)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
-         (php-mode . mk/php-smartparens)
          (php-mode . mk/phpactor)
-         (php-mode . mk/cs-fix-on-save)
+         ;; (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
          (php-mode . php-enable-symfony2-coding-style))
   :custom
   (flycheck-phpcs-standard "PSR2")
   (geben-pause-at-entry-line nil)
   :init
+  (mk/php-menu)
+  (mk/php-smartparens)
   (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
   :general
   (:keymaps 'php-mode-map :states 'normal
-            "," 'php-transient-menu)
+            "," 'mk-php-menu)
   (:keymaps 'php-mode-map :states '(insert normal)
             "M-." 'smart-jump-go)
   (:keymaps 'php-mode-map :states 'normal :prefix "SPC d"
@@ -86,10 +89,10 @@
             "u" '(geben-step-out :wk "step out")
             "v" '(geben-display-context :wk "context")
             "w" '(geben-display-window-function :wk "window"))
-
   :config
   (add-hook 'php-mode-hook
-            ;; TODO compare with https://github.com/Fuco1/.emacs.d/commit/a4c83a10a959e3ce1d572cc48429d41632b5768e
+            (setq-local flycheck-php-phpstan-executable
+                        (concat (php-project-get-root-dir) "/vendor/bin/phpstan"))
             (require 'flycheck-phpstan)
             (flycheck-mode t))
   )

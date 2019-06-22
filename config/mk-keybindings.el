@@ -1,3 +1,5 @@
+
+;;; Code:
 (use-package transient
   :defer 1
   :config
