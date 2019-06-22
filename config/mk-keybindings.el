@@ -77,13 +77,6 @@
 
    ;; Projects
    "p" '(mk-projectile :wk "project")
-   ;; "p" '(:ignore t :which-key "Projects")
-   ;; "pb" '(counsel-projectile-switch-to-buffer :which-key "buffers")
-   ;; "pe" 'projectile-recentf
-   ;; "pf" 'projectile-find-file
-   ;; "pp" 'projectile-persp-switch-project
-   ;; "pl" 'persp-window-switch
-   ;; "pt" 'neotree-toggle
 
    "nf" '(narrow-to-defun :wk "narrow to function")
    "nr" '(narrow-to-region :wk "narrow to region")
@@ -110,7 +103,7 @@
    ;; "M"  '(sp-backward-slurp-sexp :wk sp-backward-slurp-sexp)
    "l"  '(sp-forward-slurp-sexp :wk "sp-forward-slurp-sexp")
    ;; "c"  '(sp-convolute-sexp :wk sp-convolute-sexp)
-   ;; "D"  '(sp-backward-kill-sexp :wk sp-backward-kill-sexp)
+   "D"  '(sp-backward-kill-sexp :wk "sp-backward-kill-sexp")
    "d"  '(sp-kill-sexp :wk "sp-kill-sexp")
    ;; "e"  '(sp-emit-sexp :wk sp-emit-sexp)
    ;; "l"  '(sp-end-of-sexp :wk sp-end-of-sexp)

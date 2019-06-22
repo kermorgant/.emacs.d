@@ -26,7 +26,7 @@
       ("u" "Test File" projectile-find-test-file)]
      ["Search"
       ("a" "AG" projectile-ag)
-      ("r" "AG" rg-project)
+      ("r" "RG" rg-project)
       ("A" "Grep" projectile-grep)
       ("s" "Multi Occur" projectile-multi-occur)
       ("t" "Find Tag" projectile-find-tag)
