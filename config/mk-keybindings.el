@@ -1,6 +1,6 @@
 (use-package transient
   :defer 1
-  :init
+  :config
   (transient-bind-q-to-quit))
 
 (use-package which-key

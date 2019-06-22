@@ -26,6 +26,34 @@
   (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local))))
 
+(with-eval-after-load "transient"
+  (define-transient-command php-transient-menu ()
+    "Php"
+    [["Class"
+      ("cc" "Copy" phpactor-copy-class)
+      ("cn" "New" phpactor-create-new-class)
+      ("cr" "Move" phpactor-move-class)
+      ("ci" "Inflect" phpactor-inflect-class)
+      ("n"  "Namespace" phpactor-fix-namespace)]
+     ["Properties"
+      ("a"  "Accessor" phpactor-generate-accessors)
+      ("pc" "Constructor" phpactor-complete-constructor)
+      ("pm" "Add missing props" phpactor-complete-properties)
+      ("C"  "Extract const" phpactor-extract-constant)
+      ("r" "Rename var locally" phpactor-rename-variable-local)
+      ("R" "Rename var in file" phpactor-rename-variable-file)]
+     ["Methods"
+      ("i" "Implement Contracts" phpactor-implement-contracts)
+      ("m"  "Generate method" phpactor-generate-method)]
+     ["Navigate"
+      ("x" "List refs" phpactor-list-references)
+      ("X" "Replace refs" phpactor-replace-references)
+      ("."  "Goto def" phpactor-goto-definition)]
+     ["Phpactor"
+      ("s" "Status" phpactor-status)
+      ("u" "Install" phpactor-install-or-update)]])
+  )
+
 (use-package php-mode
   :defer 1
   :after (smart-jump smartparens php-cs-fixer)
@@ -42,17 +70,8 @@
   :init
   (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
   :general
-  (:keymaps 'php-mode-map :states 'normal :prefix ","
-            "m" '(phpactor-context-menu :wk "context menu")
-            "cc" '(phpactor-copy-class :wk "class copy")
-            "cn" '(phpactor-create-new-class :wk "class new")
-            "ci" '(phpactor-inflect-class :wk "class inflect")
-            "cr" '(phpactor-move-class :wk "class rename")
-            "ec" '(phpactor-extract-constant :wk "extract constant")
-            "f"  '(phpactor-fix-namespace :wk "fix namespace")
-            "ga" '(phpactor-generate-accessors :wk "generate accessor")
-            "gc" '(phpactor-complete-constructor :wk "constructor complete")
-            "gm" '(phpactor-generate-method :wk "generate method"))
+  (:keymaps 'php-mode-map :states 'normal
+            "," 'php-transient-menu)
   (:keymaps 'php-mode-map :states '(insert normal)
             "M-." 'smart-jump-go)
   (:keymaps 'php-mode-map :states 'normal :prefix "SPC d"

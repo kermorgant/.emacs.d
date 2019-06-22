@@ -8,3 +8,6 @@
 /places
 /phpactor
 /config/mk-localhost.el
+/.cask
+*.elc
+/vimish-fold
