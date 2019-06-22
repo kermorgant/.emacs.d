@@ -130,6 +130,8 @@
 ;; editing configuration
 (require 'mk-editing)
 
+(require 'mk-search)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 

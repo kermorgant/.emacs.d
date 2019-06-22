@@ -2,6 +2,9 @@
 ;;; Code:
 (use-package transient
   :defer 1
+  :init
+  (message "here in transient")
+  (mk/search-menu)
   :config
   (transient-bind-q-to-quit))
 
@@ -89,12 +92,7 @@
    "nr" '(narrow-to-region :wk "narrow to region")
    "nw" 'widen
 
-   "s" '(:ignore t :which-key "Search")
-   "se" 'evil-iedit-state/iedit-mode
-   "sf" '(rg-project :wk "rg-project")
-   "sgp" '(counsel-git-grep :wk "git grep")
-   "sp" '(projectile-ag :wk "projectile-ag")
-   "ss" 'swiper
+   "s" '(mk-search-menu :which-key "Search")
 
    "v" 'er/expand-region
 

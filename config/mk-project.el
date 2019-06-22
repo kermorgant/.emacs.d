@@ -78,15 +78,6 @@
   :init
   (require 'persp-projectile))
 
-(use-package rg
-  :defer t
-  :ensure-system-package rg
-  :custom
-  (rg-custom-type-aliases
-   '(("tmpl" .    "*.html.tmpl *.txt.tmpl") )))
-
-(use-package ag
-  :defer 1)
 
 (defvar mk:created-property-string "
   :PROPERTIES:
