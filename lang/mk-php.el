@@ -24,10 +24,25 @@
   (add-hook 'php-mode-hook
             (lambda () (add-hook 'before-save-hook #'php-cs-fixer--fix nil 'local))))
 
-(eval-when-compile (require 'transient))
+(defun mk/smartjump-php ()
+  "Registers smartjump function for php."
+  (smart-jump-register :modes '(php-mode yaml-mode)
+                       :jump-fn 'phpactor-goto-definition
+                       ;; :pop-fn 'ggtags-prev-mark
+                       :refs-fn 'phpactor-find-references
+                       ;; :before-jump-fn #'smart-jump-phpactor-save-state
+                       ;; :should-jump #'smart-jump-phpactor-available-p
+                       :should-jump t
+                       :heuristic 'point
+                       ;; :refs-heuristic #'smart-jump-phpactor-find-references-succeeded-p
+                       :async nil
+                       :order 1))
 
-(defun mk/php-menu ()
-  "Defines transient menu for PHP."
+
+(use-package mk-php
+  :ensure nil
+  :after transient
+  :config
   (defvar mk-php-menu)
   (define-transient-command mk-php-menu ()
     "Php"
@@ -62,39 +77,30 @@
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/phpactor)
+         (php-mode . hs-minor-mode)
+         ;; (php-mode . (message "totototo"))
          ;; (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
          (php-mode . php-enable-symfony2-coding-style))
   :custom
   (flycheck-phpcs-standard "PSR2")
-  (geben-pause-at-entry-line nil)
+
   :init
-  (mk/php-menu)
   (mk/php-smartparens)
   (add-to-list 'magic-mode-alist `(,(rx "<?php") . php-mode))
+
   :general
   (:keymaps 'php-mode-map :states 'normal
             "," 'mk-php-menu)
   (:keymaps 'php-mode-map :states '(insert normal)
             "M-." 'smart-jump-go)
-  (:keymaps 'php-mode-map :states 'normal :prefix "SPC d"
-            "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
-            "c" '(geben-clear-predefined-breakpoints :wk "clear breakpoints")
-            "d" '(geben :wk "start debugging")
-            "q" '(geben-end :wk "quit debugging")
-            "r" '(geben-run :wk "run")
-            "x" '(geben-stop :wk "stop")
-            "o" '(geben-step-over :wk "step over")
-            "i" '(geben-step-into :wk "step into")
-            "u" '(geben-step-out :wk "step out")
-            "v" '(geben-display-context :wk "context")
-            "w" '(geben-display-window-function :wk "window"))
+
   :config
-  (add-hook 'php-mode-hook
-            (setq-local flycheck-php-phpstan-executable
-                        (concat (php-project-get-root-dir) "/vendor/bin/phpstan"))
-            (require 'flycheck-phpstan)
-            (flycheck-mode t))
+  ;; (add-hook 'php-mode-hook
+  ;;           (setq-local flycheck-php-phpstan-executable
+  ;;                       (concat (php-project-get-root-dir) "/vendor/bin/phpstan"))
+  ;;           (require 'flycheck-phpstan)
+  ;;           (flycheck-mode t))
   )
 
 ;; (use-package composer :ensure nil
@@ -118,6 +124,24 @@
   :after (php-mode flycheck)
   :config (setq phpstan-executable "~/bin/phpstan"))
 
+(use-package geben
+  :defer t
+  :custom
+  (geben-pause-at-entry-line nil)
+  :general
+  (:keymaps 'geben-mode-map :states 'normal :prefix "SPC d"
+            "b" '(geben-add-current-line-to-predefined-breakpoints :wk "add breakpoint")
+            "c" '(geben-clear-predefined-breakpoints :wk "clear breakpoints")
+            "d" '(geben :wk "start debugging")
+            "q" '(geben-end :wk "quit debugging")
+            "r" '(geben-run :wk "run")
+            "x" '(geben-stop :wk "stop")
+            "o" '(geben-step-over :wk "step over")
+            "i" '(geben-step-into :wk "step into")
+            "u" '(geben-step-out :wk "step out")
+            "v" '(geben-display-context :wk "context")
+            "w" '(geben-display-window-function :wk "window")))
+
 (defvar smart-jump-phpactor-current-point nil "The current point.")
 
 (defun smart-jump-phpactor-available-p ()
@@ -138,19 +162,6 @@
     :succeeded)
    (:default nil)))
 
-(defun mk/smartjump-php ()
-  "Registers smartjump function for php."
-  (smart-jump-register :modes '(php-mode yaml-mode)
-                       :jump-fn 'phpactor-goto-definition
-                       ;; :pop-fn 'ggtags-prev-mark
-                       :refs-fn 'phpactor-find-references
-                       ;; :before-jump-fn #'smart-jump-phpactor-save-state
-                       ;; :should-jump #'smart-jump-phpactor-available-p
-                       :should-jump t
-                       :heuristic 'point
-                       ;; :refs-heuristic #'smart-jump-phpactor-find-references-succeeded-p
-                       :async nil
-                       :order 1))
 
 ;; (use-package lsp-php :ensure nil
 ;;   :load-path "~/src/lsp-php"
@@ -167,8 +178,7 @@
 ;;                                           ))
 ;;   (setq lsp-php-workspace-root-detectors '(lsp-php-root-projectile lsp-php-root-composer-json "index.php" "robots.txt")))
 
-(use-package geben
-  :defer t)
+
 
 ;; (defun counsel-phpactor (&optional initial-input)
 ;;   "Call the \"locate\" shell command.

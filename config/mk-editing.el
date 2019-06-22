@@ -70,8 +70,8 @@
   (smart-jump-setup-default-registers))
 
 (recentf-mode 1)
-(setq recentf-max-menu-items 25
-      recentf-max-saved-items 25)
+(setq recentf-max-menu-items 100
+      recentf-max-saved-items 100)
 
 ;; (set-clipboard-coding-system 'utf-8)
 ;; (set-selection-coding-system 'utf-8)

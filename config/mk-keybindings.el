@@ -2,9 +2,6 @@
 ;;; Code:
 (use-package transient
   :defer 1
-  :init
-  (message "here in transient")
-  (mk/search-menu)
   :config
   (transient-bind-q-to-quit))
 

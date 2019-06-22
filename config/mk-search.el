@@ -4,8 +4,10 @@
 ;; using use-package :defer + :after options
 (use-package mk-search
   :ensure nil
+  :defer t
   :after transient
   :config
+  (defvar mk-search-menu)
   (define-transient-command mk-search-menu ()
     "Search"
     [["Project"
@@ -17,6 +19,7 @@
      ["Buffer"
       ("s" "Swiper" swiper)
       ("e" "Iedit" evil-iedit-state/iedit-mode)
+      ("*" "Symbol" symbol-overlay-put)
       ]
      ["folder"
       ("c" "Current" search-current-dir)
@@ -24,12 +27,43 @@
       ]
      ]
     )
+
+  (define-transient-command my-grep ()
+    ["Matcher Selection"
+     ("-E" "Extended RegExp" "--extended-regexp")
+     ("-G" "Basic RegExp" "--basic-regexp")
+     ("-P" "Perl RegExp" "--perl-regexp")
+     ("-F" "Fixed Strings" "--fixed-strings")]
+    ["Matching Control"
+     ("-e" "Pattern" "--regexp=")
+     ("-f" "Pattern from file" "--file=" my-grep:-f)
+     ("-i" "Ignore case" "--ignore-case")
+     ("-v" "Invert match" "--invert-match")
+     ("-w" "Word regexp" "--word-regexp")
+     ("-x" "Line regexp" "--line-regexp")]
+    ["General Output Control"
+     ("-c" "Display a count of matching lines" "--count")
+     ("-o" "Display only match part" "--only-matching")]
+    ["Output Line Prefix Control"
+     ("-n" "Line number" "--line-number")]
+    [("g" "grep" my-grep-do)])
+
+  (define-infix-argument my-grep:-f ()
+    :description "File"
+    :class 'transient-files
+    :argument "-f"
+    :reader 'my-grep-read-file)
+
+  (define-suffix-command my-grep-do (file &rest args)
+    (interactive (cons (read-file-name "File: ") (transient-args)))
+    (grep (mapconcat #'identity (cons "grep" (cons file args)) " ")))
   )
 
 (use-package rg
   :defer t
   :ensure-system-package rg
-  :init
+  :commands (rg-read-pattern rg-run)
+  :config
   (rg-define-search search-current-dir
     "Search in current dir"
     :query ask
@@ -48,6 +82,10 @@
 
 (use-package ag
   :defer 1)
+
+
+(defun my-grep-read-file (&rest _)
+  (expand-file-name (read-file-name "File: ")))
 
 (provide 'mk-search)
 ;;; mk-search ends here
