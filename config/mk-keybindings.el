@@ -138,11 +138,6 @@
    ))
 
 ;; ace-window-switching keybinding
-(bind-key* "M-p" 'ace-window)
-(global-set-key (kbd "M-p") 'ace-window)
-
-(progn (setq aw-scope 'frame))
-
 ;; move easily to previous or next buffer
 (global-set-key (kbd "M-h") 'previous-buffer)
 (global-set-key (kbd "M-j") 'mk/indent-new-comment-line)

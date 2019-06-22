@@ -78,7 +78,6 @@
   :init
   (require 'persp-projectile))
 
-
 (defvar mk:created-property-string "
   :PROPERTIES:
   :CREATED: %U

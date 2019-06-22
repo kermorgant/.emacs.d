@@ -1,4 +1,6 @@
 ;; load evil
+
+;;; Code:
 (use-package evil
   :init ;; tweak evil's configuration before loading it
   (setq evil-search-module 'evil-search
@@ -18,13 +20,12 @@
   (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
 
 (use-package evil-collection
-  :after (evil evil-magit)
-  :init
-  (require 'evil-collection-magit)
+  :after (evil)
   :config
   (evil-collection-init))
 
 (use-package evil-surround
+  :defer 3
   :config
   (global-evil-surround-mode))
 
@@ -35,8 +36,7 @@
     (defun mk/comment-or-uncomment-lines (&optional arg)
       (interactive "p")
       (let ((evilnc-invert-comment-line-by-line nil))
-        (evilnc-comment-or-uncomment-lines arg)))
-    ))
+        (evilnc-comment-or-uncomment-lines arg)))))
 
 (use-package evil-iedit-state
   :config (setq iedit-toggle-key-default nil))

@@ -1,5 +1,8 @@
+
+;;; Code:
 (global-subword-mode 1)
 (winner-mode 1)
+(global-linum-mode)
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package which-key
@@ -33,11 +36,14 @@
 (use-package ace-window
   :defer t
   :init
-  (setq aw-scope 'frame
-	aw-ignore-on t
-	aw-dispatch-when-more-than 3
-	aw-keys '(?h ?j ?k ?l ?u ?i ?o ?p)
-	aw-ignored-buffers '("*NeoTree*")))
+  (bind-key* "M-p" 'ace-window)
+  (global-set-key (kbd "M-p") 'ace-window)
+  :custom
+  (aw-scope 'frame)
+  (aw-ignore-on t)
+  (aw-dispatch-when-more-than 3)
+  (aw-keys '(?h ?j ?k ?l ?u ?i ?o ?p))
+  (aw-ignored-buffers '("*NeoTree*")))
 
 (use-package smartparens
   ;; :defer 1
@@ -68,6 +74,11 @@
   :commands (smart-jump-register smart-jump-go)
   :config
   (smart-jump-setup-default-registers))
+
+(use-package dumb-jump
+  :custom
+  (dumb-jump-selector 'ivy)
+  (dumb-jump-aggressive nil))
 
 (recentf-mode 1)
 (setq recentf-max-menu-items 100

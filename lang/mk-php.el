@@ -2,7 +2,10 @@
   "Add backends for php completion in company mode."
   (require 'company)
   (require 'company-phpactor)
-  (set (make-local-variable 'company-backends) '(company-phpactor company-files)))
+  (set (make-local-variable 'company-backends) '(
+                                                 company-phpactor
+                                                 company-files
+                                                 )))
 
 (defun mk/php-smartparens ()
   "Smartparens settings for PHP."
@@ -71,9 +74,13 @@
       ("u" "Install" phpactor-install-or-update)]])
   )
 
+(defun mk/legacy-style ()
+  "Add specific legacy style and activate it."
+  (php-set-style "legacy"))
+
 (use-package php-mode
-  :defer t
-  :after (smart-jump smartparens transient)
+  :defer 1
+  :after (smart-jump smartparens transient);; php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/phpactor)
@@ -81,7 +88,8 @@
          ;; (php-mode . (message "totototo"))
          ;; (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
-         (php-mode . php-enable-symfony2-coding-style))
+         ;(php-mode . php-enable-symfony2-coding-style)
+         )
   :custom
   (flycheck-phpcs-standard "PSR2")
 

@@ -1,10 +1,9 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;    Completion framework    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; mk-complete --- configuration of completion
 
-;; (use-package company-box
-;;   :diminish (company-box-mode . "[cb]")
-;;   :hook (company-mode . company-box-mode))
+;;; Commentary:
+;;; global configuration of company-mode
+
+;;; Code:
 (use-package company-prescient
   :after (company prescient)
   :config (company-prescient-mode 1))

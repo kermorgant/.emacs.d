@@ -7,7 +7,7 @@
   (projectile-invalidate-cache nil))
 
 (use-package magit
-  :defer t
+  :defer 1
   :init
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
@@ -39,7 +39,7 @@
 
 (use-package evil-magit
   :after magit
-  :init (setq evil-magit-want-horizontal-movement nil))
+  :custom (evil-magit-want-horizontal-movement nil))
 
 (use-package diff-hl                 ; Show changes in fringe
   :defer t
