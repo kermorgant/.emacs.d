@@ -1,5 +1,5 @@
-;;; Code:
 
+;;; Code:
 (use-feature mk-search
   :config
   (define-transient-command mk-search-menu ()
@@ -54,7 +54,6 @@
 
 (use-package rg
   :defer t
-  :ensure-system-package rg
   :commands (rg-read-pattern rg-run)
   :config
   (rg-define-search search-current-dir

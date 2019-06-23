@@ -109,6 +109,7 @@
 
 (use-package eyebrowse                  ; Easy workspaces creation and switching
   :ensure nil
+  :straight nil
   :defer t
   :config
   (setq eyebrowse-mode-line-separator " "

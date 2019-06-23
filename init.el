@@ -13,28 +13,33 @@
 (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 (setq initial-scratch-message nil) ; print a default message in the empty scratch buffer opened at startup
-(setq use-package-always-ensure t)
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
 (setq show-paren-delay 0)
 (setq-default indent-tabs-mode nil)
 (setq use-dialog-box nil)
-(setq package-enable-at-startup nil) ; tells emacs not to load any packages before starting up
 (setq iedit-toggle-key-default nil)
 (setq dired-dwim-target t) ;;  If non-nil, Dired tries to guess a default target directory
 ;; the following lines tell emacs where on the internet to look up
 ;; for new packages.
-(setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-                         ("gnu"       . "http://elpa.gnu.org/packages/")
-                         ("melpa"     . "https://melpa.org/packages/")))
 (defalias 'yes-or-no-p 'y-or-n-p)
 (put 'narrow-to-region 'disabled nil)
 
-(package-initialize) ; guess what this one does ?
-;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package) ; unless it is already installed
-  (package-refresh-contents) ; updage packages archive
-  (package-install 'use-package)) ; and install the most recent version of use-package
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 (eval-when-compile
   (require 'use-package)
@@ -43,6 +48,7 @@
   (declare (indent defun))
   `(use-package ,name
      :defer t
+     :straight nil
      :ensure nil
      :no-require t
      ,@args))
@@ -51,10 +57,6 @@
 (use-package diminish)
 (require 'diminish)
 (require 'bind-key)
-
-(use-package auto-compile
-  :config (auto-compile-on-load-mode))
-(use-package use-package-ensure-system-package)
 
 (setq load-prefer-newer t)
 
@@ -75,7 +77,6 @@
              (expand-file-name "defuns" user-emacs-directory))
 
 (use-package exec-path-from-shell
-  :ensure t
   :if (memq window-system '(mac ns))
   :config
   (setq exec-path-from-shell-arguments '("-l"))
@@ -96,6 +97,7 @@
   :commands (avy-goto-word-1))
 
 (use-package ivy
+  :straight t
   :diminish ivy-mode
   :config
   (ivy-mode 1)

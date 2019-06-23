@@ -52,10 +52,11 @@
 (use-package smartparens
   ;; :defer 1
   :diminish smartparens-mode
-  :custom
-  (smartparens-strict-mode t)
   :config
   (progn
+    (setq smartparens-strict-mode t)
+    (setq sp-ignore-modes-list
+          (delete 'minibuffer-inactive-mode sp-ignore-modes-list))
     (require 'smartparens-config)
     (smartparens-global-mode 1)))
 
