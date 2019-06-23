@@ -85,7 +85,6 @@
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/phpactor)
          (php-mode . hs-minor-mode)
-         ;; (php-mode . (message "totototo"))
          ;; (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
          ;(php-mode . php-enable-symfony2-coding-style)
@@ -115,7 +114,7 @@
 ;;   :load-path "~/src/composer.el")
 
 (use-package phpactor
-  :load-path "~/src/phpactor.el"
+  :straight (phpactor :host github :type git :repo "emacs-php/phpactor.el" :branch "feature/phpactor-executable-defcustom-take2")
   )
 
 (use-package company-phpactor ; :ensure nil
