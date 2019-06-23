@@ -8,16 +8,19 @@
 
 (use-package magit
   :defer 1
+  :after (transient)
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (magit-completing-read-function 'ivy-completing-read)
   :init
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
   (add-hook 'magit-revision-mode-hook 'my-truncate-lines)
   (advice-add 'magit-checkout :after #'run-projectile-invalidate-cache)
   (advice-add 'magit-branch-and-checkout ; This is `b c'.
               :after #'run-projectile-invalidate-cache)
   :config
-  (setq magit-completing-read-function 'ivy-completing-read)
-  (setq-default magit-diff-refine-hunk 'all))
+  (setq-default magit-diff-refine-hunk 'all)
+  )
 
 (evil-define-key 'normal magit-status-mode-map (kbd "p") 'winner-undo)
 
@@ -31,6 +34,7 @@
 (use-package magit-todos
   :after magit
   :defer t
+  :functions (magit-gitflow-popup)
   :init
   (setq magit-todos-require-colon nil)
   (magit-todos-mode t)

@@ -1,13 +1,7 @@
 ;;; Code:
 
-;; this is a hacky solution to define mk-search-menu after transient is loaded
-;; using use-package :defer + :after options
-(use-package mk-search
-  :ensure nil
-  :defer t
-  :after transient
+(use-feature mk-search
   :config
-  (defvar mk-search-menu)
   (define-transient-command mk-search-menu ()
     "Search"
     [["Project"
@@ -27,7 +21,6 @@
       ]
      ]
     )
-
   (define-transient-command my-grep ()
     ["Matcher Selection"
      ("-E" "Extended RegExp" "--extended-regexp")

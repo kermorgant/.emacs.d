@@ -1,10 +1,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun mk/projectile-menu ()
-  "Defines projectile transient menu."
-  (defvar mk-projectile)
-  (defvar mk-projectile-cache)
+(use-feature mk-project
+  :config
   (define-transient-command mk-projectile-cache ()
     "Cache"
     [["Cache"
@@ -57,8 +55,6 @@
 (use-package projectile
   :after (transient)
   :defer t
-  :init
-  (mk/projectile-menu)
   :config
   (projectile-mode)
   :custom

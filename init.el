@@ -37,7 +37,16 @@
   (package-install 'use-package)) ; and install the most recent version of use-package
 
 (eval-when-compile
-  (require 'use-package))
+  (require 'use-package)
+  (defmacro use-feature (name &rest args)
+  "Like `use-package', but with `no-require' active."
+  (declare (indent defun))
+  `(use-package ,name
+     :defer t
+     :ensure nil
+     :no-require t
+     ,@args))
+  )
 
 (use-package diminish)
 (require 'diminish)

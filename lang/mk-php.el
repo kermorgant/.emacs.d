@@ -1,3 +1,5 @@
+
+;;; Code:
 (defun mk/company-php ()
   "Add backends for php completion in company mode."
   (require 'company)
@@ -42,9 +44,7 @@
                        :order 1))
 
 
-(use-package mk-php
-  :ensure nil
-  :after transient
+(use-feature mk-php
   :config
   (defvar mk-php-menu)
   (define-transient-command mk-php-menu ()
@@ -80,7 +80,7 @@
 
 (use-package php-mode
   :defer 1
-  :after (smart-jump smartparens transient);; php-cs-fixer)
+  :after (smart-jump smartparens);; php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/phpactor)

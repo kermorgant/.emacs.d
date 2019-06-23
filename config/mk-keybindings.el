@@ -1,13 +1,54 @@
-
 ;;; Code:
 (use-package transient
-  :defer 1
+  :demand t
+  ;; :functions (define-transient-command define-infix-argument define-suffix-command)
   :config
   (transient-bind-q-to-quit))
 
 (use-package which-key
   ;; :defer 10
   :config (which-key-mode t))
+
+(use-feature mk-keybindings
+  :config
+  (define-transient-command mk-sexp-menu ()
+    "sexp"
+    [[:description "wrapping"
+                   ("u" "unwrap" sp-unwrap-sexp)
+                   ("U" "b-unwrap" sp-backward-unwrap-sexp)
+                   ("s" "split" sp-split-sexp)
+                   ]
+     ["actions"
+      ("d" "kill" sp-kill-sexp)
+      ("D" "b-kill" sp-backward-kill-sexp )
+      ]
+     ["move"
+      ("<" "prev" sp-beginning-of-previous-sexp)
+      (">" "next" sp-beginning-of-next-sexp)
+      ]
+     ]
+    )
+  (define-transient-command mk-git-menu ()
+    "git"
+    [[:description "magit"
+                   ("s" "status" magit-status)
+                   ("b" "blame" magit-blame)
+                   ("l" "log file" magit-log-buffer-file)
+                   ("F" "fetch all" magit-fetch-all)
+                   ]
+     ["others"
+      ("t" "time-machine" git-timemachine)
+      ;; ("f" "git-flow" magit-gitflow-popup)
+      ]])
+  (define-transient-command mk-narrow-menu ()
+    "narrow"
+    [["narrow"
+      ("f" "function" narrow-to-defun)
+      ("r" "region" narrow-to-region)
+      ("p" "page" narrow-to-page)
+      ("w" "widen" widen)
+      ]])
+  )
 
 (use-package general
   :config
@@ -20,8 +61,9 @@
   (general-define-key
    :states '(normal visual emacs)
    "*"   'symbol-overlay-put
+   "m"   'evil-narrow-indirect
    "TAB" 'evil-indent)
-  
+
   (general-define-key
    :keymaps '(compilation-mode-map ag-mode-map)
    "M-p"   'ace-window)
@@ -29,6 +71,10 @@
   (general-define-key
    :keymaps '(magit-status-mode-map)
    "q"   'winner-undo)
+
+  (general-define-key
+   :states '(normal visual insert)
+   "s-SPC" 'mk-sexp-menu)
 
   (general-define-key
    :states '(normal visual insert emacs motion)
@@ -44,11 +90,6 @@
    ;; "TAB" '(switch-to-other-buffer :which-key "prev buffer")
    "SPC" '(counsel-M-x  :which-key "M-x")
 
-
-   ;; Applications
-   "a" '(:ignore t :which-key "Applications")
-   "ad" 'dired
-
    "bb" 'ivy-switch-buffer
    "bd" 'mk/kill-this-buffer
 
@@ -62,10 +103,7 @@
    "fs" 'save-buffer
 
    ;; GIT
-   "g"  '(:ignore t :which-key "Git")
-   "gb" '(magit-blame :wk "blame")
-   "gs" '(magit-status :wk "status")
-   "gt" '(git-timemachine :wk "time machine")
+   "g"  '(mk-git-menu :wk "git")
 
    "jj" '(avy-goto-word-or-subword-1 :which-key "go to char")
    "j=" 'mk/indent-region-or-buffer :wk "indent region or buffer"
@@ -78,9 +116,7 @@
    ;; Projects
    "p" '(mk-projectile :wk "project")
 
-   "nf" '(narrow-to-defun :wk "narrow to function")
-   "nr" '(narrow-to-region :wk "narrow to region")
-   "nw" 'widen
+   "n" '(mk-narrow-menu :wk "narrowing")
 
    "s" '(mk-search-menu :which-key "Search")
 
@@ -92,43 +128,7 @@
    "w/" 'split-window-right-and-focus
    "w-" 'split-window-below
    )
-
-  (general-define-key
-   :states '(normal visual insert)
-   :prefix "s-SPC"
-   "A"  '(sp-add-to-previous-sexp :wk "sp-add-to-previous-sexp")
-   ;; "a"  '(sp-add-to-next-sexp :wk sp-add-to-next-sexp)
-   ;; "B"  '(sp-backward-barf-sexp :wk sp-backward-barf-sexp)
-   ;; "b"  '(sp-forward-barf-sexp :wk sp-forward-barf-sexp)
-   ;; "M"  '(sp-backward-slurp-sexp :wk sp-backward-slurp-sexp)
-   "l"  '(sp-forward-slurp-sexp :wk "sp-forward-slurp-sexp")
-   ;; "c"  '(sp-convolute-sexp :wk sp-convolute-sexp)
-   "D"  '(sp-backward-kill-sexp :wk "sp-backward-kill-sexp")
-   "d"  '(sp-kill-sexp :wk "sp-kill-sexp")
-   ;; "e"  '(sp-emit-sexp :wk sp-emit-sexp)
-   ;; "l"  '(sp-end-of-sexp :wk sp-end-of-sexp)
-   ;; "h"  '(sp-beginning-of-sexp :wk sp-beginning-of-sexp)
-   ;; "j"  '(sp-join-sexp :wk sp-join-sexp)
-   ;; "K"  '(sp-splice-sexp-killing-backward :wk )
-   ;; "k"  '(sp-splice-sexp-killing-forward :wk )
-   ;; "n"  '(sp-next-sexp :wk )
-   ;; "p"  '(sp-previous-sexp :wk )
-   ;; "r"  '(sp-raise-sexp :wk )
-   ;; "s"  '(sp-splice-sexp-killing-around :wk )
-   ;; "t"  '(sp-transpose-sexp :wk )
-   "U"  '(sp-backward-unwrap-sexp :wk "backward-unwrap")
-   "u"  '(sp-unwrap-sexp :wk "unwrap")
-   "w"  '(sp-rewrap-sexp :wk "rewrap" )
-   ","  '(sp-split-sexp :wk "sp-split-sexp")
-   ;; "Y"  '(sp-backward-copy-sexp :wk )
-   ;; "y"  '(sp-copy-sexp :wk )
-   ;; ","  '(sp-previous-sexp :wk )
-   ;; "."  '(sp-next-sexp :wk )
-   ;; "<"  '(sp-backward-down-sexp :wk )
-   ;; ">"  '(sp-down-sexp :wk )
-   "("  '(sp-wrap-round :wk "wrap-round")
-   "["  '(sp-wrap-square :wk "wrap-square")
-   ))
+  )
 
 ;; ace-window-switching keybinding
 ;; move easily to previous or next buffer

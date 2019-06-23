@@ -17,7 +17,15 @@
     (list (point-min) (point-max)))
 
   ;; example how to map a command in normal mode (called 'normal state' in evil)
-  (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
+  (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit)
+
+  ;; https://demonastery.org/2013/04/emacs-evil-narrow-region/
+  (evil-define-operator evil-narrow-indirect (beg end type)
+    "Indirectly narrow the region from BEG to END."
+    (interactive "<R>")
+    (evil-normal-state)
+    (mk/narrow-to-region-indirect beg end))
+  )
 
 (use-package evil-collection
   :after (evil)

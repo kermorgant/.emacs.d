@@ -5,6 +5,10 @@
 (global-linum-mode)
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(recentf-mode 1)
+(setq recentf-max-menu-items 100
+      recentf-max-saved-items 100)
+
 (use-package which-key
   :defer t)
 
@@ -48,10 +52,11 @@
 (use-package smartparens
   ;; :defer 1
   :diminish smartparens-mode
+  :custom
+  (smartparens-strict-mode t)
   :config
   (progn
     (require 'smartparens-config)
-    (setq smartparens-strict-mode t)
     (smartparens-global-mode 1)))
 
 (use-package wgrep
@@ -79,14 +84,6 @@
   :custom
   (dumb-jump-selector 'ivy)
   (dumb-jump-aggressive nil))
-
-(recentf-mode 1)
-(setq recentf-max-menu-items 100
-      recentf-max-saved-items 100)
-
-;; (set-clipboard-coding-system 'utf-8)
-;; (set-selection-coding-system 'utf-8)
-;; (prefer-coding-system 'iso-latin-1-unix)
 
 (use-package beacon
   :defer 1
