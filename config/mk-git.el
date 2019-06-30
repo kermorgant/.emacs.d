@@ -31,16 +31,6 @@
   :after magit
   :defer t)
 
-(use-package magit-todos
-  :after magit
-  :defer t
-  :functions (magit-gitflow-popup)
-  :init
-  (setq magit-todos-require-colon nil)
-  (magit-todos-mode t)
-  :config
-  (with-eval-after-load 'magit-todos (require 'evil-collection-magit-todos)))
-
 (use-package evil-magit
   :after magit
   :custom (evil-magit-want-horizontal-movement nil))

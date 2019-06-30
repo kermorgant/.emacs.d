@@ -43,7 +43,6 @@
                        :async nil
                        :order 1))
 
-
 (use-feature mk-php
   :config
   (defvar mk-php-menu)
@@ -110,15 +109,8 @@
   ;;           (flycheck-mode t))
   )
 
-;; (use-package composer :ensure nil
-;;   :load-path "~/src/composer.el")
-
 (use-package phpactor
   :straight (phpactor :host github :type git :repo "emacs-php/phpactor.el" :branch "feature/phpactor-executable-defcustom-take2")
-  )
-
-(use-package company-phpactor ; :ensure nil
-  :load-path "~/src/phpactor.el"
   )
 
 (use-package php-cs-fixer
@@ -129,6 +121,7 @@
 (use-package flycheck-phpstan
   :defer t
   :after (php-mode flycheck)
+  :custom (phpstan-level 4)
   :config (setq phpstan-executable "~/bin/phpstan"))
 
 (use-package geben

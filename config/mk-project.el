@@ -20,7 +20,7 @@
       ("L" "File DWIM Other Window" projectile-find-file-dwim-other-window)
       ("o" "Other File" projectile-find-other-file)
       ("O" "Other file Other Window" projectile-find-other-file-other-window)
-      ("r" "Recent File" projectile-recentf)
+      ("e" "Recent File" projectile-recentf)
       ("u" "Test File" projectile-find-test-file)]
      ["Search"
       ("a" "AG" projectile-ag)
@@ -128,6 +128,11 @@
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter))
 
+(use-package doom-todo-ivy
+  :straight (doom-todo-ivy :host github :type git :repo "jsmestad/doom-todo-ivy" :branch "master")
+  :defer t
+  :config (map-put doom/ivy-task-tags '"@todo" "warning")
+  :hook (after-init . doom-todo-ivy))
 
 (provide 'mk-project)
 ;;; mk-project ends here
