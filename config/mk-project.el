@@ -131,8 +131,7 @@
 (use-package doom-todo-ivy
   :straight (doom-todo-ivy :host github :type git :repo "jsmestad/doom-todo-ivy" :branch "master")
   :defer t
-  :config (map-put doom/ivy-task-tags '"@todo" "warning")
-  :hook (after-init . doom-todo-ivy))
+  :config (map-put doom/ivy-task-tags '"@todo" "warning"))
 
 (provide 'mk-project)
 ;;; mk-project ends here
