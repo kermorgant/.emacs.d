@@ -27,7 +27,7 @@
 
 (use-package doom-modeline
   :defer t
-  :hook (after-init . doom-modeline-init))
+  :hook (after-init . doom-modeline-mode))
 
 (provide 'mk-appearance)
 ;;; mk-appearance ends here
