@@ -71,7 +71,7 @@
       ("i" "Implement Contracts" phpactor-implement-contracts)
       ("m"  "Generate method" phpactor-generate-method)]
      ["Navigate"
-      ("x" "List refs" phpactor-list-references)
+      ("x" "List refs" xref-find-references)
       ("X" "Replace refs" phpactor-replace-references)
       ("."  "Goto def" phpactor-goto-definition)]
      ["Phpactor"
@@ -106,6 +106,7 @@
   (:keymaps 'php-mode-map :states 'normal
             "," 'mk-php-menu)
   (:keymaps 'php-mode-map :states '(insert normal)
+            "M-/" 'xref-find-references
             "M-." 'smart-jump-go)
 
   :config
@@ -121,8 +122,9 @@
   )
 
 (use-package php-cs-fixer
+  :defer t
+  :straight (php-cs-fixer :host github :type git :repo "kermorgant/php-cs-fixer.el" :branch "master")
   :commands php-cs-fixer--fix
-  :load-path "~/src/php-cs-fixer.el"
   :config (setq php-cs-fixer--enable nil))
 
 (use-package flycheck-phpstan
