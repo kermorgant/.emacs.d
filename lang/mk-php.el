@@ -24,6 +24,12 @@
   (add-hook 'phpactor-after-update-file-hook
             (lambda () (save-buffer))))
 
+(defun mk/phpactor-xref ()
+  "Activates xref backend using phpactor."
+  (make-local-variable 'xref-prompt-for-identifier)
+  (setq xref-prompt-for-identifier nil)
+  (add-hook 'xref-backend-functions #'phpactor-xref-backend nil t))
+
 (defun mk/cs-fix-on-save ()
   "Run php-cs-fixer when saving a php buffer."
   (add-hook 'php-mode-hook
@@ -83,6 +89,7 @@
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/phpactor)
+         (php-mode . mk/phpactor-xref)
          (php-mode . hs-minor-mode)
          ;; (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
@@ -110,7 +117,7 @@
   )
 
 (use-package phpactor
-  :straight (phpactor :host github :type git :repo "emacs-php/phpactor.el" :branch "feature/phpactor-executable-defcustom-take2")
+  :straight (phpactor :host github :type git :repo "emacs-php/phpactor.el" :branch "xref-experiment")
   )
 
 (use-package php-cs-fixer

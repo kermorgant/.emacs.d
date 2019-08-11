@@ -1,3 +1,5 @@
+
+;;; Code:
 (use-package helpful
   :defer t
   :bind (("C-h f" . helpful-callable)
