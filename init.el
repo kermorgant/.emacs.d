@@ -79,14 +79,17 @@
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config
-  (setq exec-path-from-shell-arguments '("-l"))
+  ;; (setenv "SHELL" "/bin/zsh")
+  ;; (setq exec-path-from-shell-arguments '("-l"))
   (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "GOROOT")
-  (exec-path-from-shell-copy-env "GOPATH")
-  (exec-path-from-shell-copy-env "NPMBIN")
-  (exec-path-from-shell-copy-env "LC_ALL")
-  (exec-path-from-shell-copy-env "LANG")
-  (exec-path-from-shell-copy-env "LC_TYPE"))
+  ;; (exec-path-from-shell-copy-env "PATH")
+  ;; (exec-path-from-shell-copy-env "GOROOT")
+  ;; (exec-path-from-shell-copy-env "GOPATH")
+  ;; (exec-path-from-shell-copy-env "NPMBIN")
+  ;; (exec-path-from-shell-copy-env "LC_ALL")
+  ;; (exec-path-from-shell-copy-env "LANG")
+  ;; (exec-path-from-shell-copy-env "LC_TYPE")
+  )
 
 (require 'mk-appearance)
 
@@ -156,6 +159,8 @@
 
 ;; general programming tools
 (require 'mk-general)
+
+(require 'mk-org)
 
 ;; auto completion
 (require 'mk-complete)

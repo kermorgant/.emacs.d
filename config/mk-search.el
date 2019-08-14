@@ -70,7 +70,8 @@
     :dir ask)
   :custom
   (rg-custom-type-aliases
-   '(("tmpl" .    "*.html.tmpl *.txt.tmpl") )))
+   '(("tmpl" .    "*.html.tmpl *.txt.tmpl *.sql.tmpl")
+     ("bconf" .    "bconf.txt.*"))))
 
 (use-package ag
   :defer 1)

@@ -26,6 +26,8 @@
 
 (use-package flycheck
   :defer t
+  :custom
+  (flycheck-checker-error-threshold 1000)
   :init (global-flycheck-mode))
 
 (use-package expand-region
@@ -55,8 +57,8 @@
   :config
   (progn
     (setq smartparens-strict-mode t)
-    (setq sp-ignore-modes-list
-          (delete 'minibuffer-inactive-mode sp-ignore-modes-list))
+    ;; (setq sp-ignore-modes-list
+    ;;       (delete 'minibuffer-inactive-mode sp-ignore-modes-list))
     (require 'smartparens-config)
     (smartparens-global-mode 1)))
 

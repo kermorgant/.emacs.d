@@ -19,8 +19,8 @@
 
 (defun mk/phpactor ()
   "Phpactor tweaks."
-  (make-local-variable 'eldoc-documentation-function)
-  (setq eldoc-documentation-function 'phpactor-hover)
+  ;; (make-local-variable 'eldoc-documentation-function)
+  ;; (setq eldoc-documentation-function 'phpactor-hover)
   (add-hook 'phpactor-after-update-file-hook
             (lambda () (save-buffer))))
 
@@ -91,7 +91,7 @@
          (php-mode . mk/phpactor)
          (php-mode . mk/phpactor-xref)
          (php-mode . hs-minor-mode)
-         ;; (php-mode . mk/cs-fix-on-save)
+         (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
          ;(php-mode . php-enable-symfony2-coding-style)
          )
@@ -118,14 +118,24 @@
   )
 
 (use-package phpactor
-  :straight (phpactor :host github :type git :repo "emacs-php/phpactor.el" :branch "xref-experiment")
+  :straight (phpactor
+             :host github
+             :type git
+             :repo "emacs-php/phpactor.el"
+             :branch "xref-experiment"
+             :files ("*.el" "composer.json" "composer.lock" (:exclude "*test.el"))
+             )
   )
+
+;; (use-package company-phpactor ; :ensure nil
+;;   :load-path "~/src/phpactor.el"
+;;   )
 
 (use-package php-cs-fixer
   :defer t
   :straight (php-cs-fixer :host github :type git :repo "kermorgant/php-cs-fixer.el" :branch "master")
   :commands php-cs-fixer--fix
-  :config (setq php-cs-fixer--enable nil))
+  :config (setq php-cs-fixer--enable t))
 
 (use-package flycheck-phpstan
   :defer t

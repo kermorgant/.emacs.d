@@ -7,5 +7,7 @@
   :type 'string
   :group 'python)
 
+(use-package pyvenv)
+
 (provide 'mk-python)
 ;;; mk-python ends here
