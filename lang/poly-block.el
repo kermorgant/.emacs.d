@@ -14,6 +14,7 @@
   :tail-matcher (eval-when-compile
                   (rx "%>"))
   :can-overlap t
+  :can-nest t
   :head-mode 'body
   :tail-mode 'body)
 
