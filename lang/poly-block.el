@@ -13,6 +13,7 @@
                   (rx (: "<%" word-end)))
   :tail-matcher (eval-when-compile
                   (rx "%>"))
+  :can-overlap t
   :head-mode 'body
   :tail-mode 'body)
 

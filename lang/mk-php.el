@@ -1,4 +1,3 @@
-
 ;;; Code:
 (defun mk/company-php ()
   "Add backends for php completion in company mode."
@@ -106,7 +105,6 @@
   (:keymaps 'php-mode-map :states 'normal
             "," 'mk-php-menu)
   (:keymaps 'php-mode-map :states '(insert normal)
-            "M-/" 'xref-find-references
             "M-." 'smart-jump-go)
 
   :config
