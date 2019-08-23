@@ -133,7 +133,7 @@
   :defer t
   :straight (php-cs-fixer :host github :type git :repo "kermorgant/php-cs-fixer.el" :branch "master")
   :commands php-cs-fixer--fix
-  :config (setq php-cs-fixer--enable t))
+  :config (setq php-cs-fixer--enable nil))
 
 (use-package flycheck-phpstan
   :defer t

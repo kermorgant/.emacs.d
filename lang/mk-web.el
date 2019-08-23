@@ -1,6 +1,8 @@
 ;;; mk-web --- essentially web-mode
 
-(add-to-list 'auto-mode-alist '("\\.html.tmpl\\'" . web-mode))
+;;; Code:
+
+;; (add-to-list 'auto-mode-alist '("\\.html.tmpl\\'" . bt-web-mode))
 (add-to-list 'auto-mode-alist '("\\.sql.tmpl\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsqlin\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsql\\'" . sql-mode))

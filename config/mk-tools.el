@@ -9,5 +9,8 @@
 (use-package jq-mode
   :defer 2)
 
+(use-package string-inflection
+  :defer t)
+
 (provide 'mk-tools)
 ;;; mk-tools ends here
