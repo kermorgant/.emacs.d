@@ -54,5 +54,9 @@
   :init
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
 
+(use-package evil-owl
+  :defer t
+  :straight (evil-owl :host github :type git :repo "mamapanda/evil-owl"))
+
 (provide 'mk-evil)
 ;;; mk-evil ends here

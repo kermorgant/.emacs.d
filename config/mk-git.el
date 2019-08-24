@@ -41,6 +41,10 @@
          ;; (dired-mode         . diff-hl-dired-mode)
          (magit-post-refresh . diff-hl-magit-post-refresh)))
 
+(use-package forge
+  :defer t
+  :after magit)
+
 (use-package git-timemachine
   :defer t
   :config
