@@ -156,6 +156,8 @@
 ;; auto completion
 (require 'mk-complete)
 
+(require 'mk-go)
+
 (require 'mk-php)
 
 (require 'mk-python)
