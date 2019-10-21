@@ -49,6 +49,8 @@
                        :order 1))
 
 (use-feature mk-php
+  ;; :after (magit)
+  :commands (mk-php-menu)
   :config
   (defvar mk-php-menu)
   (define-transient-command mk-php-menu ()
@@ -84,7 +86,7 @@
 
 (use-package php-mode
   :defer 1
-  :after (smart-jump smartparens);; php-cs-fixer)
+  :after (general smart-jump smartparens);; php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/phpactor)

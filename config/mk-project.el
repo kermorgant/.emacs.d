@@ -2,6 +2,7 @@
 ;;; Code:
 
 (use-feature mk-project
+  :commands (mk-projectile-cache mk-projectile)
   :config
   (define-transient-command mk-projectile-cache ()
     "Cache"
@@ -53,8 +54,6 @@
   )
 
 (use-package projectile
-  :after (transient)
-  :defer t
   :config
   (projectile-mode)
   :custom
@@ -66,13 +65,13 @@
 (use-package counsel-projectile
   :defer t)
 
-(use-package perspective
-  :init (persp-mode))
+(use-package perspective)
 
 (use-package persp-projectile
-  :after (perspective projectile)
+  :after (perspective)
   :init
-  (require 'persp-projectile))
+  (require 'persp-projectile)
+  (persp-mode))
 
 (defvar mk:created-property-string "
   :PROPERTIES:

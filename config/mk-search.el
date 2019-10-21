@@ -1,6 +1,7 @@
 
 ;;; Code:
 (use-feature mk-search
+  :commands (mk-search-menu my-grep)
   :config
   (define-transient-command mk-search-menu ()
     "Search"

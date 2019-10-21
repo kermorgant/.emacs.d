@@ -1,15 +1,17 @@
 ;;; Code:
 (use-package transient
+  :ensure nil
   :demand t
-  ;; :functions (define-transient-command define-infix-argument define-suffix-command)
+  :commands (define-transient-command define-infix-argument define-suffix-command)
   :config
   (transient-bind-q-to-quit))
 
 (use-package which-key
-  ;; :defer 10
+  :after magit
   :config (which-key-mode t))
 
 (use-feature mk-keybindings
+  :commands (mk-sexp-menu mk-git-menu mk-narrow-menu)
   :config
   (define-transient-command mk-sexp-menu ()
     "sexp"

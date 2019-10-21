@@ -7,8 +7,7 @@
   (projectile-invalidate-cache nil))
 
 (use-package magit
-  :defer 1
-  :after (transient)
+  ;; :defer 1
   :custom
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (magit-completing-read-function 'ivy-completing-read)
@@ -28,8 +27,8 @@
   (define-key magit-status-mode-map (kbd "p") nil))
 
 (use-package magit-gitflow
-  :after magit
-  :defer t)
+  :commands (turn-on-magit-gitflow)
+  )
 
 (use-package evil-magit
   :after magit
@@ -41,9 +40,9 @@
          ;; (dired-mode         . diff-hl-dired-mode)
          (magit-post-refresh . diff-hl-magit-post-refresh)))
 
-(use-package forge
-  :defer t
-  :after magit)
+;; (use-package forge
+;;   :defer t
+;;   :after magit)
 
 (use-package git-timemachine
   :defer t
