@@ -77,7 +77,9 @@
              (expand-file-name "defuns" user-emacs-directory))
 
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
+  :init
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
   :config
   (setq exec-path-from-shell-arguments nil)
   (exec-path-from-shell-initialize))
