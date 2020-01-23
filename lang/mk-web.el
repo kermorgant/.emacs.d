@@ -6,6 +6,9 @@
 (add-to-list 'auto-mode-alist '("\\.sql.tmpl\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsqlin\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsql\\'" . sql-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist
              '("\\.json.tmpl\\'" . (lambda ()
                                      (json-mode)
@@ -15,46 +18,51 @@
           (function (lambda () (sql-highlight-postgres-keywords))))
 
 (use-package web-mode
-  :after (company-web prettier-js tide)
+  ;; :after (company-web prettier-js)
   ;; :defer 1
   :mode (("\\.html\\'" . web-mode)
          ("\\.html\\.twig\\'" . web-mode)
          ("\\.html.tmpl\\'" . web-mode)
          ("\\.vue\\'" . web-mode)
          ("\\.tsx\\'" . web-mode)
-         ("\\.jsx\\'" . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset 4
-        web-mode-enable-css-colorization t
-        web-mode-enable-current-element-highlight t
-        web-mode-css-indent-offset 4
-        web-mode-code-indent-offset 4
-        web-mode-comment-style 2 ;server comments
-        web-mode-enable-auto-pairing nil
-        web-mode-enable-current-element-highlight t
-        web-mode-enable-current-column-highlight t
-        web-mode-engines-alist '(("asp"    . "\\.html.tmpl\\'")))
-  (add-hook 'web-mode-hook (lambda()
-                             (cond ((equal web-mode-content-type "html")
-                                    (my/web-html-setup))
-                                   ((member web-mode-content-type '("vue"))
-                                    (my/web-vue-setup))
-                                   )))
+         ;; ("\\.jsx\\'" . web-mode)
+         )
+  :custom
+  ;; (web-mode-markup-indent-offset 4)
+  (web-mode-enable-css-colorization t)
+  (web-mode-enable-current-element-highlight t)
+  ;; (web-mode-css-indent-offset 4)
+  ;; (web-mode-code-indent-offset 4)
+  (web-mode-comment-style 2) ;server comments
+  (web-mode-enable-auto-pairing nil)
+  (web-mode-enable-current-element-highlight t)
+  (web-mode-enable-current-column-highlight t)
+  (web-mode-engines-alist '(("asp"    . "\\.html.tmpl\\'")))
+  :general
+  (:keymaps 'web-mode-map
+            :states '(normal visual)
+            :prefix "SPC"
+            "mrc" '(web-mode-element-clone :wk "element-clone")
+            "mrd" '(web-mode-element-vanish :wk "element-vanish")
+            "mrk" '(web-mode-element-kill :wk "element-kill")
+            "mrr" '(web-mode-element-rename :wk "element-rename")
+            "mrw" '(web-mode-element-wrap :wk "element-wrap")
+            "mz" '(web-mode-fold-or-unfold :wk "element-fold"))
+  ;; :config
+  ;; (add-hook 'web-mode-hook (lambda()
+  ;;                            (cond ((equal web-mode-content-type "html")
+  ;;                                   (my/web-html-setup))
+  ;;                                  ((member web-mode-content-type '("vue"))
+  ;;                                   (my/web-vue-setup))
+  ;;                                  )))
   :init
-  (add-to-list 'company-backends 'company-web-html)
-  (web-mode-use-tabs)
+  ;; (add-to-list 'company-backends 'company-web-html)
+  ;; (web-mode-use-tabs)
   (add-hook 'web-mode-hook
-            (general-define-key
-             :states '(normal visual)
-             :prefix "SPC"
-             :keymaps 'web-mode-map
-             "mrc" '(web-mode-element-clone :wk "element-clone")
-             "mrd" '(web-mode-element-vanish :wk "element-vanish")
-             "mrk" '(web-mode-element-kill :wk "element-kill")
-             "mrr" '(web-mode-element-rename :wk "element-rename")
-             "mrw" '(web-mode-element-wrap :wk "element-wrap")
-             "mz" '(web-mode-fold-or-unfold :wk "element-fold")
-             ))
+            (lambda ()
+              (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                (message "here")
+                (setup-tide-mode))))
   (electric-indent-mode +1)
   )
 
@@ -77,6 +85,16 @@
 
   )
 
+(use-package prettier-js
+  :defer t
+  :hook ((js2-mode . prettier-js-mode)
+         (js-mode . prettier-js-mode)
+         (typescript-mode . prettier-js-mode)
+         (css-mode . prettier-js-mode)
+         ;; (web-mode . prettier-js-mode)
+         )
+  )
+
 (defun my/web-vue-setup()
   "Setup for js related."
   (message "web-mode use vue related setup")
@@ -89,20 +107,6 @@
                '(comany-tide company-web-html company-css company-files))
   )
 
-(use-package prettier-js
-  :defer t
-  :hook ((js2-mode . prettier-js-mode)
-         (typescript-mode . prettier-js-mode)
-         (css-mode . prettier-js-mode)
-         ;; (web-mode . prettier-js-mode)
-         )
-  :config
-  (setq prettier-js-args '(
-                           "--trailing-comma" "es5"
-                           "--bracket-spacing" "false"
-                           "--tab-width" "4"
-                           ))
-  )
 
 (defun setup-tide-mode ()
   "Setup tide mode for other mode."

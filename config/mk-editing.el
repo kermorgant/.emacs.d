@@ -92,6 +92,18 @@
   :defer 1
   :init (beacon-mode 1))
 
+(use-package editorconfig
+  :defer t
+  :hook (typescript-mode . editorconfig-mode)
+  :hook (js-mode . editorconfig-mode)
+  :hook (web-mode . editorconfig-mode)
+  :custom
+  (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
+  :init
+  (add-hook 'editorconfig-after-apply-functions
+            (lambda (props) (setq web-mode-block-padding 0)))
+  )
+
 ;; Whitespace butler - clean up whitespace
 (use-package ws-butler
   :config

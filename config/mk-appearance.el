@@ -1,4 +1,4 @@
-(when (member "Source Code Pro" (font-family-list)) (set-frame-font "Source Code Pro-13" t t))
+(when (member "Source Code Pro" (font-family-list)) (set-frame-font "Source Code Pro-10" t t))
 
 ;(scroll-bar-mode -1)
 (tool-bar-mode   -1)
