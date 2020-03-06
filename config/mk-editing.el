@@ -93,12 +93,12 @@
   :init (beacon-mode 1))
 
 (use-package editorconfig
-  :defer t
-  :hook (typescript-mode . editorconfig-mode)
-  :hook (js-mode . editorconfig-mode)
-  :hook (web-mode . editorconfig-mode)
+  ;; :defer t
+  :config
+  (editorconfig-mode 1)
   :custom
   (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
+  (editorconfig-exclude-modes '(fundamental-mode))
   :init
   (add-hook 'editorconfig-after-apply-functions
             (lambda (props) (setq web-mode-block-padding 0)))

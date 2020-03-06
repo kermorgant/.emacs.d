@@ -122,9 +122,12 @@
   ;; `M-x package-install [ret] company`
   (company-mode +1))
 
+(use-package typescript-mode)
+
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (use-package tide
+  :after editorconfig
   :defer t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)

@@ -31,7 +31,7 @@
 
 (use-package default-text-scale
   :defer t
-  :config (default-text-scale-mode 1))
+  :init (default-text-scale-mode 1))
 
 (provide 'mk-appearance)
 ;;; mk-appearance ends here
