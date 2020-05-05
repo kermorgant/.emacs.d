@@ -60,8 +60,8 @@
   ;; (web-mode-use-tabs)
   (add-hook 'web-mode-hook
             (lambda ()
-              (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (message "here")
+              (when (member  (file-name-extension buffer-file-name) '("tsx"))
+                (prettier-js-mode)
                 (setup-tide-mode))))
   (electric-indent-mode +1)
   )
@@ -122,9 +122,11 @@
   ;; `M-x package-install [ret] company`
   (company-mode +1))
 
-(use-package typescript-mode)
+(use-package typescript-mode
+  :init
+  (add-hook 'setup-tide-mode #'typescript-mode))
 
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (use-package tide
   :after editorconfig

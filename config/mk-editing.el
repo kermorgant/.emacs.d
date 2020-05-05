@@ -104,6 +104,9 @@
             (lambda (props) (setq web-mode-block-padding 0)))
   )
 
+(use-package origami
+  :defer t)
+
 ;; Whitespace butler - clean up whitespace
 (use-package ws-butler
   :config

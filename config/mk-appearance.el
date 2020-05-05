@@ -19,7 +19,12 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-one t))
+  (load-theme 'doom-one t)
+  ;; (load-theme 'doom-material t)
+  ;; (load-theme 'doom-solarized-light t)
+  ;; (load-theme 'doom-one-light t)
+  ;; (load-theme 'doom-tomorrow-day t)
+  )
 
 ;; All The Icons
 (use-package all-the-icons

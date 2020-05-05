@@ -76,7 +76,7 @@
 
   (general-define-key
    :states '(normal visual insert)
-   "s-SPC" 'mk-sexp-menu)
+   "s-o" 'mk-sexp-menu)
 
   (general-define-key
    :states '(normal visual insert emacs motion)

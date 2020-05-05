@@ -8,8 +8,9 @@
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
 (setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
 (setq ring-bell-function 'ignore )	; silent bell when you make a mistake
-;; (setq coding-system-for-read 'utf-8 )	; use utf-8 by default
+;; (setq coding-system-for-read 'utf-8)	; use utf-8 by default
 ;; (setq coding-system-for-write 'utf-8 )
+;; (setq buffer-file-coding-system 'utf-8)
 (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 (setq initial-scratch-message nil) ; print a default message in the empty scratch buffer opened at startup
