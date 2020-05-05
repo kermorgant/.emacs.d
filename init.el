@@ -169,7 +169,7 @@
 (require 'mk-vue)
 
 ;; lsp
-;(require 'mk-lsp)
+(require 'mk-lsp)
 
 ;; web
 (require 'mk-web)
