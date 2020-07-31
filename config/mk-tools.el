@@ -12,5 +12,8 @@
 (use-package string-inflection
   :defer t)
 
+(use-package crontab-mode
+  :defer t)
+
 (provide 'mk-tools)
 ;;; mk-tools ends here

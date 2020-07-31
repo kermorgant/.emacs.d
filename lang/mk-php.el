@@ -90,7 +90,7 @@
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
          (php-mode . mk/phpactor)
-         (php-mode . mk/phpactor-xref)
+         ;(php-mode . mk/phpactor-xref)
          (php-mode . hs-minor-mode)
          (php-mode . mk/cs-fix-on-save)
          (php-mode . mk/smartjump-php)
@@ -122,9 +122,10 @@
              :host github
              :type git
              :repo "emacs-php/phpactor.el"
-             :branch "xref-experiment"
+             :branch "master"
              :files ("*.el" "composer.json" "composer.lock" (:exclude "*test.el"))
              )
+  :custom (phpactor-use-native-json nil)
   )
 
 ;; (use-package company-phpactor ; :ensure nil

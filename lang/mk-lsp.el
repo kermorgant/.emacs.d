@@ -3,15 +3,12 @@
 (use-package lsp-mode
   :defer t
   :commands (lsp lsp-deferred)
-   :hook (
+  :custom
+  (lsp-eldoc-render-all t)
+  :hook (
          (go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   )
-
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 (use-package lsp-ui
   :defer t
@@ -19,7 +16,9 @@
   :commands lsp-ui-mode
   :config
   (setq lsp-ui-sideline-enable nil
-        lsp-ui-doc-enable nil
+        lsp-ui-peek-enable t
+        lsp-ui-doc-enable t
+        lsp-ui-imenu-enable t
         lsp-ui-flycheck-enable t
         lsp-ui-imenu-enable t)
   :custom
@@ -30,7 +29,7 @@
   :commands lsp-ivy-workspace-symbol)
 
 (use-package company-lsp
-  :defer t
+  :disabled
   :config (push 'company-lsp company-backends))
 
 (provide 'mk-lsp)
