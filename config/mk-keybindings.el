@@ -2,7 +2,7 @@
 (use-package transient
   :ensure nil
   :demand t
-  :commands (define-transient-command define-infix-argument define-suffix-command)
+  :commands (transient-define-prefix define-infix-argument define-suffix-command)
   :config
   (transient-bind-q-to-quit))
 
@@ -13,7 +13,7 @@
 (use-feature mk-keybindings
   :commands (mk-sexp-menu mk-git-menu mk-narrow-menu)
   :config
-  (define-transient-command mk-sexp-menu ()
+  (transient-define-prefix mk-sexp-menu ()
     "sexp"
     [[:description "wrapping"
                    ("u" "unwrap" sp-unwrap-sexp)
@@ -30,7 +30,7 @@
       ]
      ]
     )
-  (define-transient-command mk-git-menu ()
+  (transient-define-prefix mk-git-menu ()
     "git"
     [[:description "magit"
                    ("s" "status" magit-status)
@@ -42,7 +42,7 @@
       ("t" "time-machine" git-timemachine)
       ;; ("f" "git-flow" magit-gitflow-popup)
       ]])
-  (define-transient-command mk-narrow-menu ()
+  (transient-define-prefix mk-narrow-menu ()
     "narrow"
     [["narrow"
       ("f" "function" narrow-to-defun)

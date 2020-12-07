@@ -30,10 +30,6 @@
   :commands (turn-on-magit-gitflow)
   )
 
-(use-package evil-magit
-  :after magit
-  :custom (evil-magit-want-horizontal-movement nil))
-
 (use-package diff-hl                 ; Show changes in fringe
   :defer t
   :hook ((prog-mode          . diff-hl-mode)

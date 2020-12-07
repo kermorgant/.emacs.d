@@ -53,7 +53,7 @@
   :commands (mk-php-menu)
   :config
   (defvar mk-php-menu)
-  (define-transient-command mk-php-menu ()
+  (transient-define-prefix mk-php-menu ()
     "Php"
     [["Class"
       ("cc" "Copy" phpactor-copy-class)

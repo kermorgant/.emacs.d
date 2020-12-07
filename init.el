@@ -159,6 +159,9 @@
 ;; auto completion
 (require 'mk-complete)
 
+;; configs
+(require 'mk-configs)
+
 (require 'mk-go)
 
 (require 'mk-php)

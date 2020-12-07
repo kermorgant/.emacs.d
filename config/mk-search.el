@@ -3,7 +3,7 @@
 (use-feature mk-search
   :commands (mk-search-menu my-grep)
   :config
-  (define-transient-command mk-search-menu ()
+  (transient-define-prefix mk-search-menu ()
     "Search"
     [["Project"
       ("a" "AG" projectile-ag)
@@ -22,7 +22,7 @@
       ]
      ]
     )
-  (define-transient-command my-grep ()
+  (transient-define-prefix my-grep ()
     ["Matcher Selection"
      ("-E" "Extended RegExp" "--extended-regexp")
      ("-G" "Basic RegExp" "--basic-regexp")
@@ -42,13 +42,13 @@
      ("-n" "Line number" "--line-number")]
     [("g" "grep" my-grep-do)])
 
-  (define-infix-argument my-grep:-f ()
+  (transient-define-argument my-grep:-f ()
     :description "File"
     :class 'transient-files
     :argument "-f"
     :reader 'my-grep-read-file)
 
-  (define-suffix-command my-grep-do (file &rest args)
+  (transient-define-suffix my-grep-do (file &rest args)
     (interactive (cons (read-file-name "File: ") (transient-args)))
     (grep (mapconcat #'identity (cons "grep" (cons file args)) " ")))
   )
