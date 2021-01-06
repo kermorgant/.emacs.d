@@ -7,7 +7,8 @@
 
 (recentf-mode 1)
 (setq recentf-max-menu-items 100
-      recentf-max-saved-items 100)
+      recentf-max-saved-items 100
+      mode-require-final-newline t)
 
 (use-package which-key
   :defer t)
