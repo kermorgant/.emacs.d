@@ -168,6 +168,8 @@
 
 (require 'mk-python)
 
+(require 'mk-misc)
+
 ;; vue
 (require 'mk-vue)
 
