@@ -5,7 +5,11 @@
   :commands (lsp lsp-deferred)
   :custom
   (lsp-eldoc-render-all t)
+  (lsp-phpactor-path "/usr/local/bin/phpactor")
+  ;; (lsp-intelephense-server-command "intelephense --stdio")
+  ;; (lsp-intelephense-trace-server t)
   :hook (
+         (php-mode . lsp)
          (go-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   )
