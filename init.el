@@ -81,8 +81,10 @@
   :init
   (exec-path-from-shell-copy-env "SSH_AGENT_PID")
   (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+  (exec-path-from-shell-copy-env "NPM_ARTIFACTORY_4_EMAIL")
+  (exec-path-from-shell-copy-env "NPM_ARTIFACTORY_4_AUTH_KEY")
   :config
-  (setq exec-path-from-shell-arguments nil)
+  ;; (setq exec-path-from-shell-arguments nil)
   (exec-path-from-shell-initialize))
 
 (require 'mk-appearance)
