@@ -113,5 +113,11 @@
   :config
   (ws-butler-global-mode t))
 
+(use-package undo-fu
+  :defer t
+  :config
+  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo))
+
 (provide 'mk-editing)
 ;;; mk-editing ends here

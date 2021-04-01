@@ -10,7 +10,8 @@
         evil-shift-round nil
         evil-want-C-u-scroll t
         evil-want-integration t
-        evil-want-keybinding nil)
+        evil-want-keybinding nil
+        evil-undo-system 'undo-fu)
   :config ;; tweak evil after loading it
   (evil-mode)
   (evil-define-text-object evil-inner-buffer (count &optional beg end type)
