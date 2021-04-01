@@ -2,6 +2,8 @@
 
 ;;; Code:
 
+(use-package flymake-eslint)
+
 ;; (add-to-list 'auto-mode-alist '("\\.html.tmpl\\'" . bt-web-mode))
 (add-to-list 'auto-mode-alist '("\\.sql.tmpl\\'" . sql-mode))
 (add-to-list 'auto-mode-alist '("\\.pgsqlin\\'" . sql-mode))
@@ -62,7 +64,9 @@
             (lambda ()
               (when (member  (file-name-extension buffer-file-name) '("tsx"))
                 (prettier-js-mode)
-                (setup-tide-mode))))
+                (flymake-eslint-enable)
+                ;; (setup-tide-mode)
+                )))
   (electric-indent-mode +1)
   )
 
@@ -100,8 +104,6 @@
   (message "web-mode use vue related setup")
   (setup-tide-mode)
   (prettier-js-mode)
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (flycheck-select-checker 'javascript-eslint)
   ;; (my/use-eslint-from-node-modules)
   (add-to-list (make-local-variable 'company-backends)
                '(comany-tide company-web-html company-css company-files))
@@ -113,8 +115,7 @@
   (interactive)
   (message "setup tide mode")
   (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (flymake-eslint-enable)
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
   ;; company is an optional dependency. You have to
@@ -122,18 +123,25 @@
   ;; `M-x package-install [ret] company`
   (company-mode +1))
 
+(defun setup-typescript ()
+  "Setup typescript dev settings."
+  (flymake-eslint-enable)
+  )
+
 (use-package typescript-mode
   :init
-  (add-hook 'setup-tide-mode #'typescript-mode))
+  ;; (add-hook 'setup-tide-mode #'typescript-mode)
+  ;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
+  (add-hook 'typescript-mode-hook #'setup-typescript)
+  )
 
-;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (use-package tide
   :after editorconfig
   :defer t
-  :after (typescript-mode company flycheck)
-  :hook ((typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode))
+  :after (typescript-mode company flymake)
+  ;; :hook ((typescript-mode . tide-setup)
+  ;;        (typescript-mode . tide-hl-identifier-mode))
   ;;(before-save . tide-format-before-save))
   :config
   (setq tide-completion-enable-autoimport-suggestions t)

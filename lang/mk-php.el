@@ -4,7 +4,7 @@
   (require 'company)
   (require 'company-phpactor)
   (set (make-local-variable 'company-backends) '(
-                                                 company-phpactor
+                                                 ;; company-phpactor
                                                  company-files
                                                  )))
 
