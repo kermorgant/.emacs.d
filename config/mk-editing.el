@@ -25,10 +25,17 @@
   :defer t
   :delight)
 
+(use-package flymake
+  :custom
+  (flymake-no-changes-timeout 2)
+  (flymake-start-on-save-buffer t)
+  )
+
+
 (use-package flycheck
   :defer t
-  :custom
-  (flycheck-checker-error-threshold 1000)
+  ;;:custom
+  ;;(flycheck-checker-error-threshold 1000)
   :init (global-flycheck-mode))
 
 (use-package expand-region

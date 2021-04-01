@@ -171,7 +171,7 @@
 (require 'mk-misc)
 
 ;; vue
-(require 'mk-vue)
+;(require 'mk-vue)
 
 ;; lsp
 (require 'mk-lsp)
