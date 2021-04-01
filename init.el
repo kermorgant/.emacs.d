@@ -143,6 +143,10 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+;; local customizations
+(if (not (require 'mk-localhost nil t))
+    (message "no local customizations found"))
+
 (require 'mk-git)
 
 ;; editing defuns
@@ -193,9 +197,6 @@
 ;; tools
 (require 'mk-tools)
 
-;; local customizations
-(if (not (require 'mk-localhost nil t))
-    (message "no local customizations found"))
 
 (add-hook 'after-init-hook (lambda () (setq gc-cons-threshold (* 1 1024 1024))))
 ;;; init ends here
