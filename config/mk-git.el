@@ -6,6 +6,15 @@
 (defun run-projectile-invalidate-cache (&rest _args)
   (projectile-invalidate-cache nil))
 
+(defun mk/git-commit-setup ()
+  (let ((ISSUEKEY "[[:upper:]]+-[[:digit:]]+"))
+    (when (string-match-p ISSUEKEY (magit-get-current-branch))
+      (insert
+       (replace-regexp-in-string
+        (concat ".*?\\(" ISSUEKEY "\\).*")
+        "\\1: "
+        (magit-get-current-branch))))))
+
 (use-package magit
   ;; :defer 1
   :custom
@@ -14,6 +23,8 @@
   :init
   (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
   (add-hook 'magit-revision-mode-hook 'my-truncate-lines)
+  (add-hook 'git-commit-setup-hook 'mk/git-commit-setup)
+
   (advice-add 'magit-checkout :after #'run-projectile-invalidate-cache)
   (advice-add 'magit-branch-and-checkout ; This is `b c'.
               :after #'run-projectile-invalidate-cache)
