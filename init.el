@@ -77,6 +77,11 @@
 (add-to-list 'load-path
              (expand-file-name "defuns" user-emacs-directory))
 
+(use-package nvm
+;;	      :custom
+;;(nvm-dir "~/.local/share/nvm"config)
+	      )
+
 (use-package exec-path-from-shell
   :init
   (exec-path-from-shell-copy-env "SSH_AGENT_PID")

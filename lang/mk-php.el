@@ -48,37 +48,37 @@
                        :async nil
                        :order 1))
 
-;; (use-feature mk-php
-;;   ;; :after (magit)
-;;   :commands (mk-php-menu)
-;;   :config
-;;   (defvar mk-php-menu)
-;;   (transient-define-prefix mk-php-menu ()
-;;     "Php"
-;;     [["Class"
-;;       ("cc" "Copy" phpactor-copy-class)
-;;       ("cn" "New" phpactor-create-new-class)
-;;       ("cr" "Move" phpactor-move-class)
-;;       ("ci" "Inflect" phpactor-inflect-class)
-;;       ("n"  "Namespace" phpactor-fix-namespace)]
-;;      ["Properties"
-;;       ("a"  "Accessor" phpactor-generate-accessors)
-;;       ("pc" "Constructor" phpactor-complete-constructor)
-;;       ("pm" "Add missing props" phpactor-complete-properties)
-;;       ("C"  "Extract const" phpactor-extract-constant)
-;;       ("r" "Rename var locally" phpactor-rename-variable-local)
-;;       ("R" "Rename var in file" phpactor-rename-variable-file)]
-;;      ["Methods"
-;;       ("i" "Implement Contracts" phpactor-implement-contracts)
-;;       ("m"  "Generate method" phpactor-generate-method)]
-;;      ["Navigate"
-;;       ("x" "List refs" xref-find-references)
-;;       ("X" "Replace refs" phpactor-replace-references)
-;;       ("."  "Goto def" phpactor-goto-definition)]
-;;      ["Phpactor"
-;;       ("s" "Status" phpactor-status)
-;;       ("u" "Install" phpactor-install-or-update)]])
-;;   )
+(use-feature mk-php
+  ;; :after (magit)
+  :commands (mk-php-menu)
+  :config
+  (defvar mk-php-menu)
+  (transient-define-prefix mk-php-menu ()
+    "Php"
+    [["Class"
+      ("cc" "Copy" phpactor-copy-class)
+      ("cn" "New" phpactor-create-new-class)
+      ("cr" "Move" phpactor-move-class)
+      ("ci" "Inflect" phpactor-inflect-class)
+      ("n"  "Namespace" phpactor-fix-namespace)]
+     ["Properties"
+      ("a"  "Accessor" phpactor-generate-accessors)
+      ("pc" "Constructor" phpactor-complete-constructor)
+      ("pm" "Add missing props" phpactor-complete-properties)
+      ("C"  "Extract const" phpactor-extract-constant)
+      ("r" "Rename var locally" phpactor-rename-variable-local)
+      ("R" "Rename var in file" phpactor-rename-variable-file)]
+     ["Methods"
+      ("i" "Implement Contracts" phpactor-implement-contracts)
+      ("m"  "Generate method" phpactor-generate-method)]
+     ["Navigate"
+      ("x" "List refs" xref-find-references)
+      ("X" "Replace refs" phpactor-replace-references)
+      ("."  "Goto def" phpactor-goto-definition)]
+     ["Phpactor"
+      ("s" "Status" phpactor-status)
+      ("u" "Install" phpactor-install-or-update)]])
+  )
 
 (defun mk/legacy-style ()
   "Add specific legacy style and activate it."
@@ -89,7 +89,7 @@
   :after (general smart-jump smartparens);; php-cs-fixer)
   :mode ("\\.php\\'" . php-mode)
   :hook ((php-mode . mk/company-php)
-         ;; (php-mode . mk/phpactor)
+         (php-mode . mk/phpactor)
          ;(php-mode . mk/phpactor-xref)
          (php-mode . hs-minor-mode)
          (php-mode . mk/cs-fix-on-save)
@@ -121,12 +121,12 @@
   :straight (phpactor
              :host github
              :type git
-             :repo "emacs-php/phpactor.el"
-             :branch "master"
+             :repo "kermorgant/phpactor.el"
+             :branch "v0.17"
              :files ("*.el" "composer.json" "composer.lock" (:exclude "*test.el"))
              )
   :custom (phpactor-use-native-json nil)
-  )
+)
 
 ;; (use-package company-phpactor ; :ensure nil
 ;;   :load-path "~/src/phpactor.el"
